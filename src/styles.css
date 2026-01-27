@@ -1,1 +1,97 @@
-/* You can add global styles to this file, and also import other style files */
+@import "primeng/resources/themes/soho-light/theme.css";
+@import "primeng/resources/primeng.min.css";
+@import "primeicons/primeicons.css";
+
+body{
+    margin: 0px;
+}
+
+:root {
+  --primary-color: #F0EEE9 !important;   /* Pantone Cloud Dancer */
+  --secondary-color: #264E36 !important; /* Pantone Eden */
+  --accent-color: #FF6F61 !important; /* Pantone Living Coral */
+
+  --primary-color-text: #000000 !important;
+}
+:root {
+  --p-primary-color: var(--primary-color) !important;
+  --p-primary-contrast-color: var(--primary-color-text) !important;
+
+  --p-secondary-color: var(--secondary-color) !important;
+  --p-secondary-contrast-color: var(--primary-color) !important;
+
+  --p-contrast-color: var(--accent-color) !important;
+  --p-contrast-contrast-color: var(--primary-color-text) !important;
+}
+
+/* ========================================================== */
+
+/* Primário */
+.primary {
+    background-color: var(--primary-color);
+    border: var(--primary-color);
+    color: var(--primary-color-text);
+}
+.primary-btn .p-button {
+    background-color: var(--primary-color);
+    border: 1px var(--primary-color-text) solid ;
+    color: var(--primary-color-text);
+}
+.primary-head .p-menubar{
+    background-color: var(--primary-color);
+    border: var(--primary-color);
+    color: var(--primary-color-text);
+    border-radius: 0px;
+}
+
+/* Secondário */
+.secondary,
+.secondary-btn .p-button {
+    background-color: var(--secondary-color);
+    border: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+/* Terciário */
+.tertiary,
+.tertiary-btn .p-button {
+    background-color: var(--accent-color);
+    border: var(--accent-color);
+    color: var(--primary-color-text);
+}
+
+/* General */
+.card-no-footer-radius  .p-card{
+    box-shadow: none;
+    background-color: var(--primary-color);
+    border-bottom-left-radius: 0px; 
+    border-bottom-right-radius: 0px;
+    margin: 0px;
+
+    min-height: 250px;
+    max-height: 300px;
+    min-width: 250px;
+    max-width: 750px;
+}
+.card-functions .p-card{
+    background-color: var(--primary-color);
+    border: none;
+    box-shadow: none;
+    max-width: 450px;
+    min-height: 0vh;
+    color: black;
+    font-family: monospace;
+}
+.card-hover .p-card{
+    transition: all 0.3s ease;
+}
+.card-hover:hover .p-card{
+    transform: translateY(-8px);
+    box-shadow: 0 1px 25px rgba(0, 0, 0, 0.041);
+}
+
+@media (max-width: 768px){
+    .card-functions .p-card{  
+        max-width: 250px;
+    }
+}

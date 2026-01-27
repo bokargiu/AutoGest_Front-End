@@ -1,0 +1,26 @@
+<app-header/>
+<div class="content">
+    <section class="hero">
+        <div class="hero-text">
+            <h1>
+                Conheça seu Novo Saas de Gerenciamento para Autônomos!
+            </h1>
+        </div>
+
+        <div class="hero-img">
+            <img src="assets/Images/AutoGest homePage.png"/>
+        </div>
+    </section>
+    <section class="functions">
+        <div *ngFor="let card of cardsFunctions" class="central-card">
+            <p-card pRipple class="card-functions card-hover">
+                <img [src]="card.img">
+                <ng-template pTemplate="content">
+                    <h2>{{card.title}}</h2>
+                    <p>{{card.txt}}</p>
+                </ng-template>
+            </p-card>
+        </div>
+    </section>
+</div>
+<app-footer/>

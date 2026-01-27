@@ -1,0 +1,16 @@
+<p-menubar class="primary-head" [model]="items">
+    <ng-template pTemplate="start">
+        <img src="assets/Images/Logo AutoGest.png" alt="Logo" class="logo"/>
+    </ng-template>
+    <ng-template pTemplate="item" let-item>
+        <div pRipple [routerLink]="item.routerLink" class="p-menuitem-link" style="gap: 3px; color: black;">
+            <i [class]="item.icon" style="transform: translateY(-1px);"></i>
+            <span>{{item.label}}</span>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="end">
+        <div>
+            <p-button label="Login" size="small" class="secondary-btn" routerLink="/login"/>
+        </div>
+    </ng-template>
+</p-menubar>
