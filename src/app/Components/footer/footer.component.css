@@ -83,3 +83,19 @@
 }
 
 
+@media (max-width: 800px){
+    .content{
+        margin: 15px;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+    }
+    .infos{
+        grid-row: span 2;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        min-height: 100px;
+        max-height: 200px;
+        justify-content: start;
+    }
+
+}
