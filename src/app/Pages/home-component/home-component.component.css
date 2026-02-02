@@ -51,7 +51,6 @@
     min-height: 600px;
     display: grid;
     align-content: center;
-    grid-template-areas: "one" "two" "tree";
     grid-template-columns: 1fr 1fr 1fr;
 }
 .central-card{
