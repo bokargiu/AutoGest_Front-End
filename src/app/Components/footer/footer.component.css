@@ -4,7 +4,7 @@
     background-color: var(--primary-color);
     justify-content: space-around;
     align-items: center;
-    min-height: 30vh;
+    min-height: 10vh;
     width: 100%;
     padding-bottom: 20px;
 }
@@ -15,7 +15,7 @@
 }
 .content{
     width: 90vw;
-    min-height: 150px;
+    min-height: 100px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     justify-content: space-evenly;
@@ -68,7 +68,7 @@
 
 }
 .suporte *{
-    margin: 5px;
+    margin: 1px;
 }
 .suporte p{
     text-decoration: underline;
