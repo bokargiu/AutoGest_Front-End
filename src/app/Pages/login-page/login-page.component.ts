@@ -33,4 +33,8 @@ import { Button } from "primeng/button";
 export class LoginPageComponent {
   user: string | undefined
   password: string | undefined
+
+  Login(){
+    
+  }
 }
