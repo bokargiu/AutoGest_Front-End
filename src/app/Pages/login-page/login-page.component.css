@@ -55,3 +55,24 @@
     align-items: center;
     justify-content: center;
 }
+
+@media (max-width: 800px) {
+    .card{
+        grid-template-columns: 1fr;
+        grid-template-rows: 2fr 1fr 1fr;
+        min-height: 300px;
+        max-height: 500px;
+    }
+    .login{
+        gap: 12px;
+        min-height: 38vh;
+    }
+    .divider{
+        flex-direction: row;
+        min-height: 0vh;
+    }
+    .divider div{
+        width: 25vw;
+        height: 2px;
+    }
+}
