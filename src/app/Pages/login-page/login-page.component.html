@@ -1,8 +1,9 @@
 <div class="container">
     <app-header/>
         <section class="content">
-            <div class="primary-card">
-                <div class="login">
+            <div class="card">
+
+                <div class="login" >
                     <p-floatLabel>
                         <input
                         pInputText
@@ -21,6 +22,16 @@
                     </p-floatLabel>
 
                     <p-button class="tertiary-btn" label="Logar" size="small" (onClick)="Login()"/>
+                </div>
+
+                <div class="divider">
+                    <div></div>
+                    <span>Ou</span>
+                    <div></div>
+                </div>
+
+                <div class="register">
+                    <p-button label="Registrar-se" size="small" class="secondary-btn"></p-button>
                 </div>
             </div>
         </section>

@@ -63,7 +63,7 @@ body{
 .tertiary-btn .p-button {
     background-color: var(--accent-color);
     border: var(--accent-color);
-    color: var(--primary-color-text);
+    color: var(--primary-color);
 }
 
 /* General */

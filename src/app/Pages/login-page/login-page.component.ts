@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PasswordModule } from 'primeng/password';
 import { Button } from "primeng/button";
+import { DividerModule } from "primeng/divider";
 
 @Component({
   selector: 'app-login-page',
@@ -25,7 +26,8 @@ import { Button } from "primeng/button";
     FormsModule,
     FloatLabelModule,
     PasswordModule,
-    Button
+    Button,
+    DividerModule
 ],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.css'
