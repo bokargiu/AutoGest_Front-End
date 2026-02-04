@@ -1,0 +1,63 @@
+<div class="container">
+    <app-header/>
+        <section class="content">
+            <div class="card">
+
+                <div class="register" >
+                    <p-floatLabel>
+                        <input
+                        pInputText
+                        type="text"
+                        id="username"
+                        [(ngModel)]="username"/>
+                        <label for="username">Username</label>
+                    </p-floatLabel>
+
+                    <p-floatLabel>
+                        <input
+                        pInputText
+                        type="email"
+                        id="email"
+                        [(ngModel)]="email"/>
+                        <label for="email">Email</label>
+                    </p-floatLabel>
+
+                    <p-floatLabel>
+                        <p-password
+                        id="password"
+                        [(ngModel)]="password"
+                        promptLabel="Digite sua senha!"
+                        weakLabel="Muito Fraca"
+                        mediumLabel="Fraca"
+                        strongLabel="Forte">
+                        <ng-template pTemplate="header">
+                            <h5>Deve conter no mínimo 8 Caracteres e 3 requisitos</h5>
+                        </ng-template>
+                        <ng-template pTemplate="footer">
+                            <ul>
+                                <li>Letra minúscula</li>
+                                <li>Letra maiúscula</li>
+                                <li>Número</li>
+                                <li>Caractere especial</li>
+                            </ul>
+                        </ng-template>
+                    </p-password>
+                        <label for="password">Password</label>
+                    </p-floatLabel>
+
+                    <p-button class="tertiary-btn" label="Register" size="small" (onClick)="register()"/>
+                </div>
+
+                <div class="divider">
+                    <div></div>
+                    <span>Ou</span>
+                    <div></div>
+                </div>
+
+                <div class="login">
+                    <p-button label="Logar" size="small" class="secondary-btn" routerLink="/login"></p-button>
+                </div>
+            </div>
+        </section>
+    <app-footer/>
+</div>
