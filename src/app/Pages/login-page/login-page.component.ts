@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from "src/app/Components/header/header.component";
 import { FooterComponent } from "src/app/Components/footer/footer.component";
 import { CardModule } from "primeng/card";
@@ -11,7 +11,8 @@ import { FormsModule } from '@angular/forms';
 import { PasswordModule } from 'primeng/password';
 import { Button } from "primeng/button";
 import { DividerModule } from "primeng/divider";
-import { RouterLink } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
+import { UserServiceService } from 'src/app/Services/UserService/user-service.service';
 
 @Component({
   selector: 'app-login-page',
@@ -34,11 +35,25 @@ import { RouterLink } from "@angular/router";
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.css'
 })
-export class LoginPageComponent {
-  user: string | undefined
-  password: string | undefined
+export class LoginPageComponent implements OnInit {
+  user!: string
+  password!: string
+
+  constructor(private _user:UserServiceService, private router:Router) {}
+
+  ngOnInit(): void {
+      var token = localStorage.getItem("token")
+  }
 
   Login(){
-    
+    this._user.Login(this.user, this.password).subscribe({
+      next: (response) => {
+        localStorage.setItem('token', response.result);
+        this.router.navigate(['/home']);
+      },
+      error: (err) => {
+          console.error('Erro no login ', err)
+      },
+    })
   }
 }
