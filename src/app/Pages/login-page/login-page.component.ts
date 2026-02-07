@@ -53,7 +53,7 @@ export class LoginPageComponent implements OnInit {
     this._user.Login(this.user, this.password).subscribe({
       next: (response) => {
         localStorage.setItem('token', response.result);
-        this.router.navigate(['/home']);
+        this.router.navigate(['/user']);
       },
       error: (err) => {
           console.error('Erro no login ', err)
