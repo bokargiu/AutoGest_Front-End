@@ -13,6 +13,7 @@ import { Button } from "primeng/button";
 import { DividerModule } from "primeng/divider";
 import { Router, RouterLink } from "@angular/router";
 import { UserServiceService } from 'src/app/Services/UserService/user-service.service';
+import { AuthService } from 'src/app/Services/AuthService/auth.service';
 
 @Component({
   selector: 'app-login-page',
@@ -39,10 +40,13 @@ export class LoginPageComponent implements OnInit {
   user!: string
   password!: string
 
-  constructor(private _user:UserServiceService, private router:Router) {}
+  constructor(private _user:UserServiceService, private router:Router, private _token:AuthService) {}
 
   ngOnInit(): void {
-      var token = localStorage.getItem("token")
+      const valid = this._token.TokenValid();
+      if(valid){
+        this.router.navigate(['/user']);
+      }
   }
 
   Login(){
