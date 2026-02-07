@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
@@ -6,10 +7,10 @@ import { jwtDecode } from 'jwt-decode';
 })
 export class AuthService {
 
-  constructor() { }
+  constructor(private router:Router) { }
 
   TokenValid(): boolean{
-    const token = localStorage.getItem("token");
+    const token = this.getToken();
     if(!token) return false;
      try{
       const decoded: any = jwtDecode(token);
@@ -28,5 +29,9 @@ export class AuthService {
   }
   Logout(){
     localStorage.removeItem("token");
+    this.router.navigate(["/login"])
+  }
+  getToken(){
+    return localStorage.getItem("token");
   }
 }
