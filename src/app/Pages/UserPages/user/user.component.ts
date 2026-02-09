@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { AppRoutingModule } from "src/app/app-routing.module";
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [AppRoutingModule],
+  imports: [
+    RouterOutlet
+  ],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'
 })
