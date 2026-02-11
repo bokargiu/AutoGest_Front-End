@@ -27,7 +27,7 @@ body{
 /* ========================================================== */
 
 /* Primário */
-.primary {
+.primary *{
     background-color: var(--primary-color);
     border: var(--primary-color);
     color: var(--primary-color-text);
