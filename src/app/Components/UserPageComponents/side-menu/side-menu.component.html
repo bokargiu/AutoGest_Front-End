@@ -1,3 +1,13 @@
 <div class="container">
-    
+    <div *ngFor="let item of itens" class="btn">
+        <p-button class="primary-btn"
+            pRipple
+            [label]="item.label"
+            [icon]="item.icon"
+            size="small"
+            [routerLink]="item.router"
+        ></p-button>
+    </div>
+
 </div>
+

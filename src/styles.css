@@ -59,7 +59,7 @@ body{
 }
 
 /* Terciário */
-.tertiary,
+.tertiary *,
 .tertiary-btn .p-button {
     background-color: var(--accent-color);
     border: var(--accent-color);

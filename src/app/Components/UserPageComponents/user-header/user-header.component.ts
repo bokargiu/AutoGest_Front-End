@@ -10,7 +10,6 @@ import { AuthService } from 'src/app/Services/AuthService/auth.service';
   imports: [
     AvatarModule,
     Ripple,
-    ButtonDirective
 ],
   templateUrl: './user-header.component.html',
   styleUrl: './user-header.component.css'
