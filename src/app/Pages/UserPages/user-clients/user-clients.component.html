@@ -1,1 +1,37 @@
-<p>user-clients works!</p>
+<div class="container">
+    <div class="options">
+        <p-toolbar>
+            <ng-template pTemplate="start">
+                <div class="toolbar-buttons">
+                    <p-avatar
+                        pRipple
+                        icon="pi pi-plus"
+                        class="secondary hov-p">
+                    </p-avatar>
+                    <p-avatar
+                        pRipple
+                        icon="pi pi-pencil"
+                        class="secondary hov-p">
+                    </p-avatar>
+                    <p-avatar
+                        pRipple
+                        icon="pi pi-minus"
+                        class="tertiary hov-p">
+                    </p-avatar>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="end">
+                <p-iconField>
+                    <p-inputIcon styleClass="pi pi-search"/>
+                    <input pInputText placeholder="Buscar Cliente"/>
+                </p-iconField>
+            </ng-template>
+        </p-toolbar>
+    </div>
+    <div class="filters">
+
+    </div>
+    <div class="list-clients">
+
+    </div>
+</div>

@@ -51,7 +51,7 @@ body{
 }
 
 /* Secondário */
-.secondary,
+.secondary *,
 .secondary-btn .p-button {
     background-color: var(--secondary-color);
     border: var(--secondary-color);
@@ -97,6 +97,9 @@ body{
 }
 .w-full .input{
     width: 100%;
+}
+.hov-p:hover *{
+    cursor: pointer;
 }
 @media (max-width: 768px){
     .card-functions .p-card{  
