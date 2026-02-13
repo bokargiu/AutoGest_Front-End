@@ -1,6 +1,6 @@
 <div class="container">
     <div *ngFor="let item of itens" class="btn">
-        <p-button class="primary-btn"
+        <p-button [class]="item.class"
             pRipple
             [label]="item.label"
             [icon]="item.icon"
