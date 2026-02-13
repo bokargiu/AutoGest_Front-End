@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Button } from "primeng/button";
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-side-menu',
@@ -20,6 +21,13 @@ export class SideMenuComponent implements OnInit {
   constructor(private _router:Router) {}
 
   ngOnInit(): void {
+    this.creatItens();
+
+    this._router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => this.creatItens());
+  }
+  private creatItens(){
       this.itens = [
       {
         label: 'Home',
@@ -51,16 +59,14 @@ export class SideMenuComponent implements OnInit {
         router: './dashboard',
         class: this.isRoute('/user/dashboard')
       }
-    ]
+    ];
   }
 
   private isRoute(router:string){
-    if(router === this._router.url){
-      return 'secondary-btn'
-    }
-    else{
-      return 'primary-btn'
-    }
+    return router === this._router.url ?
+      'secondary-btn'
+      :
+      'primary-btn';
   }
   
 }
