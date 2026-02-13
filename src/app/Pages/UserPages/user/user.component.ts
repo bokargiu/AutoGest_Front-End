@@ -15,5 +15,6 @@ import { UserHeaderComponent } from "src/app/Components/UserPageComponents/user-
   styleUrl: './user.component.css'
 })
 export class UserComponent {
+  mobileSelected: boolean = false;
 
 }

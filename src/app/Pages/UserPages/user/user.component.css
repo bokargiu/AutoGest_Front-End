@@ -5,28 +5,31 @@
     grid-template-columns: 1fr 7fr;
     grid-template-rows: 7% 93%;
     grid-template-areas: 
-        "l c"
-        "l p";
+        "side head"
+        "side body";
     background-color: var(--primary-color);
 }
-.i1{
-    grid-area: l;
+.side-menu{
+    grid-area: side;
     border: 1px solid black;
 }
-.i2{
-    grid-area: c;
+.header{
+    grid-area: head;
     border: 1px solid black;
 }
-.i3{
-    grid-area: p;
+.content{
+    grid-area: body;
     border: 1px solid black;
 }
 
 @media (max-width: 800px){
     .container{
         grid-template-areas: 
-            "c"
-            "p";
+            "head"
+            "body";
         grid-template-columns: 1fr;
+    }
+    .side-menu{
+        display: none;
     }
 }
