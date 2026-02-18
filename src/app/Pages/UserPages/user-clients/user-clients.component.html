@@ -28,10 +28,41 @@
             </ng-template>
         </p-toolbar>
     </div>
-    <div class="filters">
-
-    </div>
     <div class="list-clients">
-
+        <p-button icon="pi pi-replay" class="primary" size="small" (onClick)="cleamTable()" />
+        <p-table 
+            #dt
+            [value]="clients"
+            [metaKeySelection]="true"
+            [scrollable]="true"
+            [scrollHeight]="'400px'"
+            styleClass="p-datatable-striped p-datatable-lg"
+            
+            >
+            <ng-template pTemplate="header">
+                <th pSortableColumn="name">
+                    Nome <p-sortIcon field="name"/>
+                </th>
+                <th>
+                    Celular
+                </th>
+                <th pSortableColumn="rating">
+                    Avaliação <p-sortIcon field="rating"/>
+                </th>
+            </ng-template>
+            <ng-template pTemplate="body" let-client>
+                <tr>
+                    <th>{{client.name}}</th>
+                    <th>{{client.cell}}</th>
+                    <th>
+                        <p-rating 
+                        [(ngModel)]="client.rating"
+                        [readonly]="true"
+                        [cancel]="false"
+                        />
+                    </th>
+                </tr>
+            </ng-template>
+        </p-table>
     </div>
 </div>
