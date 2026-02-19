@@ -14,8 +14,7 @@ export class AuthService {
     if(!token) return false;
      try{
       const decoded: any = jwtDecode(token);
-      const expired: any = decoded.exp * 1000 < Date.now().valueOf();
-      console.log(expired)
+      const expired: any = decoded.exp * 1000 < Date.now();
       if(expired) {
         this.Logout()
         return false;

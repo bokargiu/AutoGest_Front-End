@@ -6,17 +6,20 @@
                     <p-avatar
                         pRipple
                         icon="pi pi-plus"
-                        class="secondary hov-p">
+                        class="secondary hov-p"
+                        (click)="btnNew()">
                     </p-avatar>
                     <p-avatar
                         pRipple
                         icon="pi pi-pencil"
-                        class="secondary hov-p">
+                        class="secondary hov-p"
+                        (click)="btnEdit()">
                     </p-avatar>
                     <p-avatar
                         pRipple
                         icon="pi pi-minus"
-                        class="tertiary hov-p">
+                        class="tertiary hov-p"
+                        (click)="btnDell()">
                     </p-avatar>
                 </div>
             </ng-template>
@@ -36,8 +39,10 @@
             [metaKeySelection]="true"
             [scrollable]="true"
             [scrollHeight]="'400px'"
-            styleClass="p-datatable-striped p-datatable-lg"
-            
+            styleClass="p-datatable-lg"
+            [(selection)]="selectedClient"
+            [selectionMode]="'single'"
+            dataKey="id"
             >
             <ng-template pTemplate="header">
                 <th pSortableColumn="name">
@@ -51,9 +56,9 @@
                 </th>
             </ng-template>
             <ng-template pTemplate="body" let-client>
-                <tr>
+                <tr [pSelectableRow]="client">
                     <th>{{client.name}}</th>
-                    <th>{{client.cell}}</th>
+                    <th>{{client.number}}</th>
                     <th>
                         <p-rating 
                         [(ngModel)]="client.rating"
@@ -66,3 +71,18 @@
         </p-table>
     </div>
 </div>
+
+<p-dialog
+[(visible)]="newClientV"
+[style]="{ 'width': '50vw' }"
+[breakpoints]="{ '800px': '90vw'}"
+header="Crie um novo cliente:">
+    <ng-template pTemplate="content">
+        <div class="field">
+
+        </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+    
+    </ng-template>
+</p-dialog>
