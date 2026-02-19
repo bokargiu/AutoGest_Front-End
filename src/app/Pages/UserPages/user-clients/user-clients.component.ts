@@ -15,6 +15,7 @@ import { HttpClient } from '@angular/common/http';
 import { __values } from 'tslib';
 import { Client } from 'src/app/Interfaces/client';
 import { ClientService } from 'src/app/Services/ClientService/client.service';
+import { InputMaskModule } from 'primeng/inputmask';
 
 @Component({
   selector: 'app-user-clients',
@@ -31,6 +32,7 @@ import { ClientService } from 'src/app/Services/ClientService/client.service';
     RatingModule,
     FormsModule,
     DialogModule,
+    InputMaskModule
 ],
   templateUrl: './user-clients.component.html',
   styleUrl: './user-clients.component.css'
@@ -53,7 +55,10 @@ export class UserClientsComponent implements OnInit{
   selectedClient!:Client;
 
   newClientV: boolean = false;
-  newClient!:Client
+  name:string = ""
+  number:string = ""
+  rating:number = 0
+
 
   editClientV: boolean = false;
   editClient!:Client
@@ -73,6 +78,13 @@ export class UserClientsComponent implements OnInit{
   }
   btnNew(){
     this.newClientV = !this.newClientV;
+    this.name ="";
+    this.number ="";
+    this.rating =0;
+  }
+  creatNew(){
+    console.log("criado")
+    this.btnNew();
   }
   btnEdit(){
     this.editClientV = !this.editClientV;

@@ -29,6 +29,20 @@
 .list-clients p-table{
     width: 90%;
 }
+.field{
+    width: 90%;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.btns{
+    display: flex;
+    width: 100%;
+    flex-direction: row-reverse;
+    gap: 20px;
+}
 @media (max-width: 800px) {
     .container{
         grid-template-rows: 25% 75%;

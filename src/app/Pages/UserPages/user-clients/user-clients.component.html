@@ -74,15 +74,36 @@
 
 <p-dialog
 [(visible)]="newClientV"
-[style]="{ 'width': '50vw' }"
+[style]="{ 'width': '25vw'}"
 [breakpoints]="{ '800px': '90vw'}"
 header="Crie um novo cliente:">
     <ng-template pTemplate="content">
         <div class="field">
-
+            <input 
+                type="text" 
+                pInputText 
+                placeholder="Nome"
+                [(ngModel)]="name">
+            <p-inputMask
+                mask="(99) 99999-9999"
+                [(ngModel)]="number"
+                placeholder="(ddd) 00000-0000"/>
+            <p-rating
+                [(ngModel)]="rating"/>
         </div>
     </ng-template>
     <ng-template pTemplate="footer">
-    
+        <div class="btns">
+            <p-button
+                class="secondary"
+                label="Confirmar e criar"
+                size="small"
+                (onClick)="creatNew()"/>
+            <p-button
+                class="tertiary"
+                label="Cancelar"
+                size="small"
+                (onClick)="btnNew()"/>
+        </div>
     </ng-template>
 </p-dialog>
