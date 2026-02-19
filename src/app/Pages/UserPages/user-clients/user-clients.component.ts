@@ -13,14 +13,8 @@ import { FormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
 import { HttpClient } from '@angular/common/http';
 import { __values } from 'tslib';
-
-
-interface Client {
-  id:string
-  name:string
-  number:string
-  rating:number
-}
+import { Client } from 'src/app/Interfaces/client';
+import { ClientService } from 'src/app/Services/ClientService/client.service';
 
 @Component({
   selector: 'app-user-clients',
@@ -50,7 +44,7 @@ export class UserClientsComponent implements OnInit{
     {id:"5", name: 'natal', number: 'oi', rating: 2},
   ]
 
-  constructor(private http:HttpClient) {}
+  constructor(private clientS:ClientService) {}
 
   @ViewChild('dt') table: any ;
 
@@ -68,16 +62,14 @@ export class UserClientsComponent implements OnInit{
   dellClient!:Client
 
   ngOnInit(): void {
-    this.http.get<Client[]>('http://localhost:5169/api/Client').subscribe({
-      next: (res) => {
-        this.clients = res
-        console.log(this.clients)
+    this.clientS.getAll().subscribe({
+      next: (cs) => {
+          this.clients = cs;
       },
       error: (err) => {
-          console.error(err)
-      },
+        console.error(err);
+      }
     });
-    
   }
   btnNew(){
     this.newClientV = !this.newClientV;
@@ -91,6 +83,15 @@ export class UserClientsComponent implements OnInit{
     this.dellClient = this.selectedClient;
   }
   cleamTable(){
+    this.clientS.getAll().subscribe({
+      next: (cs) => {
+          this.clients = cs;
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
+    this.selectedClient = 
     this.table.reset();
   }
 
