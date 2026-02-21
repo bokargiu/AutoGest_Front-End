@@ -53,7 +53,7 @@ export class UserClientsComponent implements OnInit{
 
   clients:Client[] = [];
 
-  selectedClient!:Client;
+  selectedClient!:Client
 
   newClientV: boolean = false;
   name:string = ""
@@ -65,17 +65,9 @@ export class UserClientsComponent implements OnInit{
   editClient!:Client
 
   dellClientV: boolean = false;
-  dellClientID:string = "";
 
   ngOnInit(): void {
-    this.clientS.getAll().subscribe({
-      next: (cs) => {
-          this.clients = cs;
-      },
-      error: (err) => {
-        console.error(err);
-      }
-    });
+    this.refreshTable();
   }
   btnNew(){
     this.newClientV = !this.newClientV;
@@ -86,7 +78,11 @@ export class UserClientsComponent implements OnInit{
   creatNew(){
     this.clientS.postClient(this.name, this.number, this.rating).subscribe({
       next: () => {
-        this.cleamTable()
+        this.refreshTable();
+        console.log("Adicionado com sucesso!");
+      },
+      error: (err) => {
+        console.error(err);
       }
     });
     this.btnNew();
@@ -103,13 +99,20 @@ export class UserClientsComponent implements OnInit{
   btnDell(){
     if(this.selectedClient){
       this.dellClientV = !this.dellClientV;
-      this.dellClientID = this.selectedClient.id;
     }
   }
   dellClient(){
-    
+    this.clientS.deleteClient(this.selectedClient.id).subscribe({
+      next: () => {
+        this.refreshTable();
+        console.log("Excluido com sucesso!");
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    })
   }
-  cleamTable(){
+  refreshTable(){
     this.clientS.getAll().subscribe({
       next: (cs) => {
           this.clients = cs;

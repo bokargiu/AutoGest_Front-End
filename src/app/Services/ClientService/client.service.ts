@@ -21,6 +21,6 @@ export class ClientService {
     })
   }
   deleteClient(id:string){
-    return this.http.delete('http://localhost:5169/api/Client/' + id)
+    return this.http.delete('http://localhost:5169/api/Client/' + id);
   }
 }

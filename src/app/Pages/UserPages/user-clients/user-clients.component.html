@@ -32,7 +32,7 @@
         </p-toolbar>
     </div>
     <div class="list-clients">
-        <p-button icon="pi pi-replay" class="primary" size="small" (onClick)="cleamTable()" />
+        <p-button icon="pi pi-replay" class="primary" size="small" (onClick)="refreshTable()" />
         <p-table 
             #dt
             [value]="clients"
@@ -143,7 +143,7 @@ header="Crie um novo cliente:"
                 class="tertiary"
                 label="Cancelar"
                 size="small"
-                (onClick)="cleamTable()"/>
+                (onClick)="refreshTable()"/>
         </div>
     </ng-template>
 </p-dialog>
@@ -169,6 +169,7 @@ header="Crie um novo cliente:"
                 [disabled]="true"/>
             <p-rating
                 [disabled]="true"
+                [cancel]="false"
                 [ngModel]="selectedClient.rating"/>
         </div>
     </ng-template>
@@ -176,14 +177,14 @@ header="Crie um novo cliente:"
         <div class="btns">
             <p-button
                 class="secondary"
-                label="Alterar"
+                label="Excluir"
                 size="small"
                 (onClick)="dellClient()"/>
             <p-button
                 class="tertiary"
                 label="Cancelar"
                 size="small"
-                (onClick)="cleamTable()"/>
+                (onClick)="refreshTable()"/>
         </div>
     </ng-template>
 </p-dialog>
