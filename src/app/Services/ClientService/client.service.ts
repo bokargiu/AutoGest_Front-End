@@ -20,4 +20,7 @@ export class ClientService {
       'rating': rating
     })
   }
+  deleteClient(id:string){
+    return this.http.delete('http://localhost:5169/api/Client/' + id)
+  }
 }
