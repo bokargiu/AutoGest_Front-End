@@ -39,7 +39,7 @@
             [metaKeySelection]="true"
             [scrollable]="true"
             [scrollHeight]="'400px'"
-            styleClass="p-datatable-lg"
+            styleClass="p-datatable-striped"
             [(selection)]="selectedClient"
             [selectionMode]="'single'"
             dataKey="id"
@@ -72,11 +72,13 @@
     </div>
 </div>
 
+<!-- Novo cliente -->
 <p-dialog
 [(visible)]="newClientV"
 [style]="{ 'width': '25vw'}"
 [breakpoints]="{ '800px': '90vw'}"
-header="Crie um novo cliente:">
+header="Crie um novo cliente:"
+[closable]="false">
     <ng-template pTemplate="content">
         <div class="field">
             <input 
@@ -104,6 +106,84 @@ header="Crie um novo cliente:">
                 label="Cancelar"
                 size="small"
                 (onClick)="btnNew()"/>
+        </div>
+    </ng-template>
+</p-dialog>
+
+<!-- Editar Cliente -->
+<p-dialog
+    [closable]="false"
+    [(visible)]="editClientV"
+    [style]="{ 'width': '25vw'}"
+    [breakpoints]="{ '800px': '90vw'}"
+>
+    <ng-template pTemplate="content">
+        <div class="field">
+            <input 
+                type="text" 
+                pInputText 
+                [placeholder]="editClient.name"
+                [(ngModel)]="name">
+            <p-inputMask
+                mask="(99) 99999-9999"
+                [(ngModel)]="number"
+                [placeholder]="editClient.number"/>
+            <p-rating
+                [(ngModel)]="editClient.rating"/>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <div class="btns">
+            <p-button
+                class="secondary"
+                label="Alterar"
+                size="small"
+                (onClick)="alterar()"/>
+            <p-button
+                class="tertiary"
+                label="Cancelar"
+                size="small"
+                (onClick)="cleamTable()"/>
+        </div>
+    </ng-template>
+</p-dialog>
+
+<!-- Excluir Cliente -->
+<p-dialog
+    header="Tem certeza que quer excluir esse cliente?"
+    [closable]="false"
+    [(visible)]="dellClientV"
+    [style]="{ 'width': '25vw'}"
+    [breakpoints]="{ '800px': '90vw'}"
+>
+    <ng-template pTemplate="content">
+        <div class="field">
+            <input 
+                type="text" 
+                pInputText 
+                [placeholder]="selectedClient.name"
+                [disabled]="true">
+            <input
+                pInputText
+                [placeholder]="selectedClient.number"
+                [disabled]="true"/>
+            <p-rating
+                [disabled]="true"
+                [ngModel]="selectedClient.rating"/>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <div class="btns">
+            <p-button
+                class="secondary"
+                label="Alterar"
+                size="small"
+                (onClick)="dellClient()"/>
+            <p-button
+                class="tertiary"
+                label="Cancelar"
+                size="small"
+                (onClick)="cleamTable()"/>
         </div>
     </ng-template>
 </p-dialog>

@@ -13,4 +13,11 @@ export class ClientService {
   getAll(): Observable<Client[]> {
     return this.http.get<Client[]>('http://localhost:5169/api/Client');
   }
+  postClient(name:string, number:string, rating:number){
+    return this.http.post('http://localhost:5169/api/Client',{
+      'name': name,
+      'number': number,
+      'rating': rating
+    })
+  }
 }

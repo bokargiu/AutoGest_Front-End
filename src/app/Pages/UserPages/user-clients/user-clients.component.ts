@@ -16,6 +16,7 @@ import { __values } from 'tslib';
 import { Client } from 'src/app/Interfaces/client';
 import { ClientService } from 'src/app/Services/ClientService/client.service';
 import { InputMaskModule } from 'primeng/inputmask';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-user-clients',
@@ -64,7 +65,7 @@ export class UserClientsComponent implements OnInit{
   editClient!:Client
 
   dellClientV: boolean = false;
-  dellClient!:Client
+  dellClientID:string = "";
 
   ngOnInit(): void {
     this.clientS.getAll().subscribe({
@@ -83,16 +84,30 @@ export class UserClientsComponent implements OnInit{
     this.rating =0;
   }
   creatNew(){
-    console.log("criado")
+    this.clientS.postClient(this.name, this.number, this.rating).subscribe({
+      next: () => {
+        this.cleamTable()
+      }
+    });
     this.btnNew();
   }
   btnEdit(){
-    this.editClientV = !this.editClientV;
-    this.editClient = this.selectedClient;
+    if(this.selectedClient){
+      this.editClientV = !this.editClientV;
+      this.editClient =  { ...this.selectedClient }
+    }
+  }
+  alterar(){
+
   }
   btnDell(){
-    this.dellClientV = !this.dellClientV;
-    this.dellClient = this.selectedClient;
+    if(this.selectedClient){
+      this.dellClientV = !this.dellClientV;
+      this.dellClientID = this.selectedClient.id;
+    }
+  }
+  dellClient(){
+    
   }
   cleamTable(){
     this.clientS.getAll().subscribe({
@@ -103,6 +118,9 @@ export class UserClientsComponent implements OnInit{
         console.error(err);
       }
     });
+    this.newClientV = false;
+    this.editClientV = false;
+    this.dellClientV = false;
     this.selectedClient = 
     this.table.reset();
   }
