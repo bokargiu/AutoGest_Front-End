@@ -5,8 +5,9 @@ import { PasswordModule } from "primeng/password";
 import { FloatLabelModule } from "primeng/floatlabel";
 import { HeaderComponent } from "src/app/Components/header/header.component";
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { InputTextModule } from "primeng/inputtext";
+import { UserServiceService } from 'src/app/Services/UserService/user-service.service';
 
 @Component({
   selector: 'app-register-page',
@@ -27,8 +28,17 @@ export class RegisterPageComponent {
   username!: string
   email!: string
   password!: string
-
+  constructor(private userService:UserServiceService, private router:Router){}
   register(){
-
+    this.userService.SingUpAndLogin(this.username, this.email, this.password).subscribe({
+      next: (response) => {
+        console.log("Registro feito com sucesso!");
+        localStorage.setItem('token', response.result);
+        this.router.navigate(['/user']);
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    })
   }
 }
