@@ -26,7 +26,12 @@
             <ng-template pTemplate="end">
                 <p-iconField>
                     <p-inputIcon styleClass="pi pi-search"/>
-                    <input pInputText placeholder="Buscar Cliente"/>
+                    <input 
+                        pInputText 
+                        type="text"
+                        placeholder="Buscar Cliente"
+                        (input)="tb.filterGlobal($any($event.target).value, 'contains')"
+                        />
                 </p-iconField>
             </ng-template>
         </p-toolbar>
@@ -34,7 +39,7 @@
     <div class="list-clients">
         <p-button icon="pi pi-replay" class="primary" size="small" (onClick)="refreshTable()" />
         <p-table 
-            #dt
+            #tb
             [value]="clients"
             [metaKeySelection]="true"
             [scrollable]="true"
@@ -42,6 +47,7 @@
             styleClass="p-datatable-striped"
             [(selection)]="selectedClient"
             [selectionMode]="'single'"
+            [globalFilterFields]="['name']"
             dataKey="id"
             >
             <ng-template pTemplate="header">
@@ -85,13 +91,13 @@ header="Crie um novo cliente:"
                 type="text" 
                 pInputText 
                 placeholder="Nome"
-                [(ngModel)]="name">
+                [(ngModel)]="clientDTO.name">
             <p-inputMask
                 mask="(99) 99999-9999"
-                [(ngModel)]="number"
+                [(ngModel)]="clientDTO.number"
                 placeholder="(ddd) 00000-0000"/>
             <p-rating
-                [(ngModel)]="rating"/>
+                [(ngModel)]="clientDTO.rating"/>
         </div>
     </ng-template>
     <ng-template pTemplate="footer">
@@ -122,14 +128,14 @@ header="Crie um novo cliente:"
             <input 
                 type="text" 
                 pInputText 
-                [placeholder]="editClient.name"
-                [(ngModel)]="name">
+                [placeholder]="clientDTO.name"
+                [(ngModel)]="clientDTO.name">
             <p-inputMask
                 mask="(99) 99999-9999"
-                [(ngModel)]="number"
-                [placeholder]="editClient.number"/>
+                [(ngModel)]="clientDTO.number"
+                [placeholder]="clientDTO.number"/>
             <p-rating
-                [(ngModel)]="editClient.rating"/>
+                [(ngModel)]="clientDTO.rating"/>
         </div>
     </ng-template>
     <ng-template pTemplate="footer">

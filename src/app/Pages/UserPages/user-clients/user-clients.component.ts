@@ -17,6 +17,7 @@ import { Client } from 'src/app/Interfaces/client';
 import { ClientService } from 'src/app/Services/ClientService/client.service';
 import { InputMaskModule } from 'primeng/inputmask';
 import { delay } from 'rxjs';
+import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 
 @Component({
   selector: 'app-user-clients',
@@ -39,44 +40,41 @@ import { delay } from 'rxjs';
   styleUrl: './user-clients.component.css'
 })
 export class UserClientsComponent implements OnInit{
-  clientsTeste:Client[] = [
-    {id:"1", name: 'oi', number: 'oi', rating: 3},
-    {id:"2", name: 'tachau', number: 'oi', rating: 4},
-    {id:"3", name: 'obrigado', number: 'oi', rating: 3.5},
-    {id:"4", name: 'feliz', number: 'oi', rating: 5},
-    {id:"5", name: 'natal', number: 'oi', rating: 2},
-  ]
-
   constructor(private clientS:ClientService) {}
 
-  @ViewChild('dt') table: any ;
+  @ViewChild('tb') table!: Table;
 
   clients:Client[] = [];
 
-  selectedClient!:Client
+  selectedClient:Client | any = null;
 
   newClientV: boolean = false;
-  name:string = ""
-  number:string = ""
-  rating:number = 0
 
 
   editClientV: boolean = false;
-  editClient!:Client
+  clientDTO:Client = {
+    'id': '',
+    'name': '',
+    'number': '',
+    'rating': 0
+  }
 
   dellClientV: boolean = false;
 
   ngOnInit(): void {
-    this.refreshTable();
+    this.getClients();
   }
   btnNew(){
     this.newClientV = !this.newClientV;
-    this.name ="";
-    this.number ="";
-    this.rating =0;
+    this.clientDTO = {
+    'id': '',
+    'name': '',
+    'number': '',
+    'rating': 0
+  }
   }
   creatNew(){
-    this.clientS.postClient(this.name, this.number, this.rating).subscribe({
+    this.clientS.postClient(this.clientDTO).subscribe({
       next: () => {
         this.refreshTable();
         console.log("Adicionado com sucesso!");
@@ -90,11 +88,19 @@ export class UserClientsComponent implements OnInit{
   btnEdit(){
     if(this.selectedClient){
       this.editClientV = !this.editClientV;
-      this.editClient =  { ...this.selectedClient }
+      this.clientDTO =  { ...this.selectedClient }
     }
   }
   alterar(){
-
+    this.clientS.patchClient(this.clientDTO).subscribe({
+      next: () => {
+        console.log("Cliente Atualizado com Sucesso!");
+        this.refreshTable();
+      },
+      error: (err) => {
+        console.error(err)
+      }
+    })
   }
   btnDell(){
     if(this.selectedClient){
@@ -112,7 +118,7 @@ export class UserClientsComponent implements OnInit{
       }
     })
   }
-  refreshTable(){
+  getClients(){
     this.clientS.getAll().subscribe({
       next: (cs) => {
           this.clients = cs;
@@ -121,11 +127,19 @@ export class UserClientsComponent implements OnInit{
         console.error(err);
       }
     });
+  }
+  refreshTable(){
+    this.getClients();
+    this.clientDTO = {
+    'id': '',
+    'name': '',
+    'number': '',
+    'rating': 0
+  }
     this.newClientV = false;
     this.editClientV = false;
     this.dellClientV = false;
-    this.selectedClient = 
     this.table.reset();
+    this.selectedClient = null;
   }
-
 }

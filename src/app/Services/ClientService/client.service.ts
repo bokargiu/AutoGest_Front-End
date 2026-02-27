@@ -13,14 +13,21 @@ export class ClientService {
   getAll(): Observable<Client[]> {
     return this.http.get<Client[]>('http://localhost:5169/api/Client');
   }
-  postClient(name:string, number:string, rating:number){
+  postClient(dto:Client){
     return this.http.post('http://localhost:5169/api/Client',{
-      'name': name,
-      'number': number,
-      'rating': rating
+      'name': dto.name,
+      'number': dto.number,
+      'rating': dto.rating
     })
   }
   deleteClient(id:string){
     return this.http.delete('http://localhost:5169/api/Client/' + id);
+  }
+  patchClient(dto:Client){
+    return this.http.patch('http://localhost:5169/api/Client/'+ dto.id,{
+      'name': dto.name,
+      'number': dto.number,
+      'rating': dto.rating
+    })
   }
 }
