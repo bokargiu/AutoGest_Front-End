@@ -7,17 +7,13 @@ import { InputTextModule } from "primeng/inputtext";
 import { InputIconModule } from 'primeng/inputicon';
 import { IconFieldModule } from 'primeng/iconfield';
 import { Table, TableModule } from 'primeng/table';
-import { CommonModule } from '@angular/common';
 import { RatingModule } from 'primeng/rating';
 import { FormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
-import { HttpClient } from '@angular/common/http';
 import { __values } from 'tslib';
 import { Client } from 'src/app/Interfaces/client';
 import { ClientService } from 'src/app/Services/ClientService/client.service';
 import { InputMaskModule } from 'primeng/inputmask';
-import { delay } from 'rxjs';
-import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 
 @Component({
   selector: 'app-user-clients',
