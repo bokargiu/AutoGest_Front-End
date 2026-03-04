@@ -1,1 +1,196 @@
-<p>user-services works!</p>
+<div class="container">
+    <div class="options">
+        <p-toolbar>
+            <ng-template pTemplate="start">
+                <div class="toolbar-buttons">
+                    <p-avatar
+                        pRipple
+                        icon="pi pi-plus"
+                        class="secondary hov-p"
+                        (click)="btnNew()">
+                    </p-avatar>
+                    <p-avatar
+                        pRipple
+                        icon="pi pi-pencil"
+                        class="secondary hov-p"
+                        (click)="btnEdit()">
+                    </p-avatar>
+                    <p-avatar
+                        pRipple
+                        icon="pi pi-minus"
+                        class="tertiary hov-p"
+                        (click)="btnDell()">
+                    </p-avatar>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="end">
+                <p-iconField>
+                    <p-inputIcon styleClass="pi pi-search"/>
+                    <input
+                        pInputText
+                        type="text"
+                        placeholder="Buscar Serviço"
+                        (input)="tb.filterGlobal($any($event.target).value, 'contains')"
+                        />
+                </p-iconField>
+            </ng-template>
+        </p-toolbar>
+    </div>
+    <div class="list-services">
+        <p-button icon="pi pi-replay" class="primary" size="small" (onClick)="refreshTable()" />
+        <p-table
+            #tb
+            [value]="services"
+            [metaKeySelection]="true"
+            [scrollable]="true"
+            [scrollHeight]="'400px'"
+            styleClass="p-datatable-striped"
+            [(selection)]="selectedService"
+            [selectionMode]="'single'"
+            [globalFilterFields]="['title']"
+            dataKey="id"
+            >
+            <ng-template pTemplate="header">
+                <th pSortableColumn="title">
+                    Titulo <p-sortIcon field="title"/>
+                </th>
+                <th>
+                    Duração (minutos)
+                </th>
+                <th pSortableColumn="price">
+                    Preço <p-sortIcon field="price"/>
+                </th>
+            </ng-template>
+            <ng-template pTemplate="body" let-service>
+                <tr [pSelectableRow]="service">
+                    <th>{{service.title}}</th>
+                    <th>{{service.durationMin}}</th>
+                    <th>{{service.price | currency:'BRL'}}</th>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+
+<!-- Novo serviço -->
+<p-dialog
+[(visible)]="newServiceV"
+[style]="{ 'width': '25vw'}"
+[breakpoints]="{ '800px': '90vw'}"
+header="Crie um novo serviço:"
+[closable]="false">
+    <ng-template pTemplate="content">
+        <div class="field">
+            <input
+                type="text"
+                pInputText
+                placeholder="Titulo"
+                [(ngModel)]="serviceDTO.title">
+            <p-inputNumber
+                placeholder="Duração (minutos)"
+                [(ngModel)]="serviceDTO.durationMin"/>
+            <p-inputNumber
+                [(ngModel)]="serviceDTO.price"
+                placeholder="Preço"
+                mode="currency"
+                currency="BRL"
+                locale="pt-BR"/>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <div class="btns">
+            <p-button
+                class="secondary"
+                label="Confirmar e criar"
+                size="small"
+                (onClick)="creatNew()"/>
+            <p-button
+                class="tertiary"
+                label="Cancelar"
+                size="small"
+                (onClick)="btnNew()"/>
+        </div>
+    </ng-template>
+</p-dialog>
+
+<!-- Editar Serviço -->
+<p-dialog
+    header="Editar Serviço"
+    [closable]="false"
+    [(visible)]="editServiceV"
+    [style]="{ 'width': '25vw'}"
+    [breakpoints]="{ '800px': '90vw'}"
+>
+    <ng-template pTemplate="content">
+        <div class="field">
+            <input
+                type="text"
+                pInputText
+                [placeholder]="serviceDTO.title"
+                [(ngModel)]="serviceDTO.title">
+            <p-inputNumber
+                [(ngModel)]="serviceDTO.durationMin"/>
+            <p-inputNumber
+                [(ngModel)]="serviceDTO.price"
+                mode="currency"
+                currency="BRL"
+                locale="pt-BR"/>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <div class="btns">
+            <p-button
+                class="secondary"
+                label="Alterar"
+                size="small"
+                (onClick)="alterar()"/>
+            <p-button
+                class="tertiary"
+                label="Cancelar"
+                size="small"
+                (onClick)="refreshTable()"/>
+        </div>
+    </ng-template>
+</p-dialog>
+
+<!-- Excluir Serviço -->
+<p-dialog
+    header="Tem certeza que quer excluir esse serviço?"
+    [closable]="false"
+    [(visible)]="dellServiceV"
+    [style]="{ 'width': '25vw'}"
+    [breakpoints]="{ '800px': '90vw'}"
+>
+    <ng-template pTemplate="content">
+        <div class="field">
+            <input
+                type="text"
+                pInputText
+                [placeholder]="selectedService.name"
+                [disabled]="true">
+            <p-inputNumber
+                [placeholder]="selectedService.durationMin"
+                [disabled]="true"/>
+            <p-inputNumber
+                [ngModel]="selectedService.price"
+                [disabled]="true"
+                mode="currency"
+                currency="BRL"
+                locale="pt-BR"/>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <div class="btns">
+            <p-button
+                class="secondary"
+                label="Excluir"
+                size="small"
+                (onClick)="dellService()"/>
+            <p-button
+                class="tertiary"
+                label="Cancelar"
+                size="small"
+                (onClick)="refreshTable()"/>
+        </div>
+    </ng-template>
+</p-dialog>
