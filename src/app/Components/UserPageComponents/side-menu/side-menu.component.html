@@ -1,5 +1,6 @@
 <div class="container">
-    <div *ngFor="let item of itens" class="btn">
+    @for (item of itens; track item.label){
+    <div class="btn">
         <p-button [class]="item.class"
             pRipple
             [label]="item.label"
@@ -8,6 +9,6 @@
             [routerLink]="item.router"
         ></p-button>
     </div>
-
+    }
 </div>
 

@@ -87,6 +87,7 @@ header="Crie um novo serviço:"
                 placeholder="Titulo"
                 [(ngModel)]="serviceDTO.title">
             <p-inputNumber
+                [min]="0"
                 placeholder="Duração (minutos)"
                 [(ngModel)]="serviceDTO.durationMin"/>
             <p-inputNumber
@@ -164,9 +165,8 @@ header="Crie um novo serviço:"
     <ng-template pTemplate="content">
         <div class="field">
             <input
-                type="text"
                 pInputText
-                [placeholder]="selectedService.name"
+                [placeholder]="selectedService.title"
                 [disabled]="true">
             <p-inputNumber
                 [placeholder]="selectedService.durationMin"

@@ -49,6 +49,9 @@ body{
     border: var(--primary-color);
     color: var(--primary-color-text);
 }
+.primary-side .p-sidebar{
+    background-color: var(--primary-color);
+}
 
 /* Secondário */
 .secondary *,
