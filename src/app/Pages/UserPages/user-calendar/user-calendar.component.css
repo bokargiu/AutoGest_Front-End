@@ -1,0 +1,5 @@
+.container{
+    display: grid;
+    grid-area: 'calendar' 'options',
+               'calendar' 'agenda';
+}
