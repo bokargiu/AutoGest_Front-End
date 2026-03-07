@@ -1,6 +1,13 @@
-export interface Service {
+export interface ServiceDate {
   id: string;
   title: string;
   price: number;
-  durationMin: number | null;
+  duration: Date;
+}
+
+export interface ServiceMin {
+  id: string;
+  title: string;
+  price: number;
+  durationMin: number;
 }

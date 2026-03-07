@@ -1,6 +1,7 @@
 @import "primeng/resources/themes/soho-light/theme.css";
 @import "primeng/resources/primeng.min.css";
 @import "primeicons/primeicons.css";
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
 
 body{
     margin: 0px;
@@ -38,6 +39,11 @@ body{
     /*border: 1px var(--primary-color-text) solid ;*/
     color: var(--primary-color-text);
 }
+.primary-b .p-avatar {
+    background-color: var(--primary-color);
+    border: 2px solid rgba(0, 0, 0, 0.71);
+    color: var(--primary-color-text);
+}
 .primary-head .p-menubar{
     background-color: var(--primary-color);
     border: var(--primary-color);
@@ -67,6 +73,11 @@ body{
     background-color: var(--accent-color);
     border: var(--accent-color);
     color: var(--primary-color);
+}
+
+.tertiary-black *{
+    background-color: var(--accent-color);
+    color: var(--primary-color-text);
 }
 
 /* General */
@@ -103,6 +114,21 @@ body{
 }
 .hov-p:hover *{
     cursor: pointer;
+}
+.calendar-primary * div {
+    padding: 0px;
+    margin: 0px;
+    border-radius: 10px;
+    background-color: whitesmoke;
+    color: var(--primary-color-text);
+}
+.calendar-primary .p-datepicker * {
+    color: var(--primary-color-text);
+}
+.calendar-primary .p-datepicker {
+    border-radius: 10px;
+    background-color: var(--primary-color);
+    border: 2px solid var(--primary-color-text);
 }
 @media (max-width: 768px){
     .card-functions .p-card{  

@@ -10,12 +10,13 @@ import { Table, TableModule } from 'primeng/table';
 import { RatingModule } from 'primeng/rating';
 import { FormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
-import { Service } from 'src/app/Interfaces/service';
+import { ServiceDate, ServiceMin } from 'src/app/Interfaces/service';
 import { ServiceService } from 'src/app/Services/ServiceService/service.service';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { CommonModule } from '@angular/common';
 import { InputGroupModule } from "primeng/inputgroup";
 import { InputGroupAddonModule } from "primeng/inputgroupaddon";
+import { CalendarModule } from "primeng/calendar";
 
 @Component({
   selector: 'app-user-services',
@@ -35,7 +36,8 @@ import { InputGroupAddonModule } from "primeng/inputgroupaddon";
     InputNumberModule,
     CommonModule,
     InputGroupModule,
-    InputGroupAddonModule
+    InputGroupAddonModule,
+    CalendarModule
 ],
   templateUrl: './user-services.component.html',
   styleUrl: './user-services.component.css'
@@ -45,9 +47,9 @@ export class UserServicesComponent implements OnInit{
 
   @ViewChild('tb') table!: Table;
 
-  services:Service[] = [];
+  services:ServiceMin[] = [];
 
-  selectedService:Service | any = null;
+  selectedService:ServiceMin | any = null;
 
   newServiceV: boolean = false;
 
@@ -55,11 +57,17 @@ export class UserServicesComponent implements OnInit{
 
   dellServiceV: boolean = false;
 
-  serviceDTO:Service = {
+  serviceDTO:ServiceDate = {
     'id': '',
     'title': '',
-    'durationMin': 0,
+    'duration': new Date(0, 0, 0, 0, 0, 0),
     'price': 0
+  }
+
+   getDuration(minutes: number) {
+    const hours = Math.floor(minutes / 60);
+    const mins = minutes % 60;
+    return new Date(0, 0, 0, hours, mins, 0);
   }
 
   ngOnInit(): void {
@@ -71,7 +79,7 @@ export class UserServicesComponent implements OnInit{
     this.serviceDTO = {
     'id': '',
     'title': '',
-    'durationMin': null,
+    'duration': new Date(0, 0, 0, 0, 0, 0),
     'price': 0
   }
   }
@@ -91,6 +99,7 @@ export class UserServicesComponent implements OnInit{
     if(this.selectedService){
       this.editServiceV = !this.editServiceV;
       this.serviceDTO =  { ...this.selectedService }
+      this.serviceDTO.duration = this.getDuration(this.selectedService.durationMin);
     }
   }
   alterar(){
@@ -107,6 +116,8 @@ export class UserServicesComponent implements OnInit{
   btnDell(){
     if(this.selectedService){
       this.dellServiceV = !this.dellServiceV;
+      this.serviceDTO =  { ...this.selectedService }
+      this.serviceDTO.duration = this.getDuration(this.selectedService.durationMin);
     }
   }
   dellService(){
@@ -135,7 +146,7 @@ export class UserServicesComponent implements OnInit{
     this.serviceDTO = {
     'id': '',
     'title': '',
-    'durationMin': null,
+    'duration': new Date(0, 0, 0, 0, 0, 0),
     'price': 0
   }
     this.newServiceV = false;

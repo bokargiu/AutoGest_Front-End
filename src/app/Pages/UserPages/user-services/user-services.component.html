@@ -55,7 +55,7 @@
                     Titulo <p-sortIcon field="title"/>
                 </th>
                 <th>
-                    Duração (minutos)
+                    Duração
                 </th>
                 <th pSortableColumn="price">
                     Preço <p-sortIcon field="price"/>
@@ -64,7 +64,7 @@
             <ng-template pTemplate="body" let-service>
                 <tr [pSelectableRow]="service">
                     <th>{{service.title}}</th>
-                    <th>{{service.durationMin}}</th>
+                    <th>{{getDuration(service.durationMin) | date:'HH:mm'}}</th>
                     <th>{{service.price | currency:'BRL'}}</th>
                 </tr>
             </ng-template>
@@ -86,10 +86,11 @@ header="Crie um novo serviço:"
                 pInputText
                 placeholder="Titulo"
                 [(ngModel)]="serviceDTO.title">
-            <p-inputNumber
-                [min]="0"
-                placeholder="Duração (minutos)"
-                [(ngModel)]="serviceDTO.durationMin"/>
+            <p-calendar
+                class="calendar-primary"
+                [timeOnly]="true"
+                placeholder="Duração"
+                [(ngModel)]="serviceDTO.duration"/>
             <p-inputNumber
                 [(ngModel)]="serviceDTO.price"
                 placeholder="Preço"
@@ -129,8 +130,10 @@ header="Crie um novo serviço:"
                 pInputText
                 [placeholder]="serviceDTO.title"
                 [(ngModel)]="serviceDTO.title">
-            <p-inputNumber
-                [(ngModel)]="serviceDTO.durationMin"/>
+            <p-calendar
+                class="calendar-primary"
+                [timeOnly]="true"
+                [(ngModel)]="serviceDTO.duration"/>
             <p-inputNumber
                 [(ngModel)]="serviceDTO.price"
                 mode="currency"
@@ -166,13 +169,14 @@ header="Crie um novo serviço:"
         <div class="field">
             <input
                 pInputText
-                [placeholder]="selectedService.title"
+                [placeholder]="serviceDTO.title"
                 [disabled]="true">
-            <p-inputNumber
-                [placeholder]="selectedService.durationMin"
+            <p-calendar
+                [timeOnly]="true"
+                [ngModel]="serviceDTO.duration"
                 [disabled]="true"/>
             <p-inputNumber
-                [ngModel]="selectedService.price"
+                [ngModel]="serviceDTO.price"
                 [disabled]="true"
                 mode="currency"
                 currency="BRL"
