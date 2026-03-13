@@ -1,43 +1,200 @@
+<!-- user-calendar.component.html -->
 <div class="container">
-    <div class="calendar-container">
-        <div class="calendar">
-            <mwl-calendar-month-view
-                [viewDate]="viewDate"
-                [events]="events"
-                />
-        </div>
+  <div class="calendar-container">
+    <h2>
+      {{ viewDate.toLocaleString('pt-BR', { month: 'long', year: 'numeric' }) }}
+    </h2>
+
+    <div class="calendar">
+      <mwl-calendar-month-view
+        [viewDate]="viewDate"
+        [events]="events"
+        [locale]="'pt-BR'"
+        [activeDayIsOpen]="activeDayIsOpen"
+        (dayClicked)="dayClicked($event.day)"
+        (eventClicked)="eventClicked($event)">
+      </mwl-calendar-month-view>
     </div>
-    <div class="options">
-        <nav>
-            <p-avatar
-            pRipple
-            size="large"
-            icon="pi pi-calendar-plus"
-            class="secondary hov-p"/>
-        </nav>
-        <nav>
-            <p-avatar
-            pRipple
-            size="large"
-            icon="pi pi-pencil"
-            class="primary-b hov-p"/>
-        </nav>
-        <nav>
-            <p-avatar
-            pRipple
-            size="large"
-            icon="pi pi-calendar-times"
-            class="tertiary-black hov-p"/>
-        </nav>
-    </div>
-    <div class="agenda">
-        <mwl-calendar-week-view
-            [viewDate]="viewDate"
-            [events]="events"
-            [locale]="'pt-BR'"
-            [hourSegments]="1"
-            [dayStartHour]="4"
-            [dayEndHour]="22"
-            />
-    </div>
+  </div>
+
+  <div class="options">
+    <!-- Novo agendamento -->
+    <nav>
+      <p-avatar
+        pRipple
+        size="large"
+        [style]="{ backgroundColor: 'var(--secondary-color)', color: '#fff'}"
+        icon="pi pi-calendar-plus"
+        class="secondary hov-p"
+        (click)="newScheduleDialog()">
+      </p-avatar>
+    </nav>
+
+    <!-- Editar agendamento -->
+    <nav>
+      <p-avatar
+        pRipple
+        size="large"
+        [style]="{ backgroundColor: 'var(--primary-color)', border: '1px solid black'}"
+        icon="pi pi-pencil"
+        class="primary-b hov-p"
+        (click)="openEditSchedule()">
+      </p-avatar>
+    </nav>
+
+    <!-- Cancelar/Excluir agendamento -->
+    <nav>
+      <p-avatar
+        pRipple
+        size="large"
+        [style]="{ backgroundColor: 'var(--accent-color)'}"
+        icon="pi pi-calendar-times"
+        class="tertiary-black hov-p"
+        (click)="openDeleteSchedule()">
+      </p-avatar>
+    </nav>
+  </div>
+
+  <div class="agenda">
+    <mwl-calendar-week-view
+      [viewDate]="viewDate"
+      [events]="events"
+      [locale]="'pt-BR'"
+      [hourSegments]="1"
+      [dayStartHour]="0"
+      [dayEndHour]="24">
+    </mwl-calendar-week-view>
+  </div>
 </div>
+
+<!-- Novo Agendamento -->
+<p-dialog
+  header="Novo Agendamento"
+  [(visible)]="scheduleV"
+  [modal]="true"
+  [closable]="false"
+  [style]="{ width: '25vw', height: '60vh'}"
+  [breakpoints]="{ '800px': '90vw' }">
+
+  <ng-template pTemplate="content">
+    <div class="field">
+      <!-- Cliente -->
+      <p-dropdown
+        [options]="clients"
+        optionLabel="name"
+        optionValue="id"
+        appendTo="body"
+        [(ngModel)]="scheduleDTO.clientId"
+        placeholder="Selecione o cliente">
+      </p-dropdown>
+
+      <!-- Data e hora -->
+      <p-calendar
+        styleClass="calendar-Input"
+        [(ngModel)]="scheduleDTO.start"
+        [showTime]="true"
+        appendTo="body"
+        hourFormat="24"
+        dateFormat="dd/mm/yy"
+        placeholder="Data e hora">
+      </p-calendar>
+
+      <!-- Serviços -->
+      <p-multiSelect
+        [options]="services"
+        appendTo="body"
+        optionLabel="title"
+        optionValue="id"
+        [maxSelectedLabels]="1"
+        selectedItemsLabel="{0} selecionado(s)"
+        [(ngModel)]="selectedServices"
+        defaultLabel="Selecione os serviços"/>
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <div class="btns">
+      <p-button
+        severity="success"
+        class="secondary"
+        label="Confirmar"
+        size="small"
+        (onClick)="createSchedule()">
+      </p-button>
+
+      <p-button
+        severity="secondary"
+        class="tertiary"
+        label="Cancelar"
+        size="small"
+        (onClick)="newScheduleDialog()">
+      </p-button>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<!-- Editar Agendamento -->
+<p-dialog
+  header="Editar Agendamento"
+  [(visible)]="editScheduleV"
+  [modal]="true"
+  [closable]="false"
+  [style]="{ width: '25vw', height: '60vh'}"
+  [breakpoints]="{ '800px': '90vw' }">
+
+  <ng-template pTemplate="content">
+    <div class="field">
+      <!-- Cliente -->
+      <p-dropdown
+        [options]="clients"
+        optionLabel="name"
+        optionValue="id"
+        appendTo="body"
+        [(ngModel)]="schedule.client.id"
+        placeholder="Selecione o cliente">
+      </p-dropdown>
+
+      <!-- Data e hora -->
+      <p-calendar
+        styleClass="calendar-Input"
+        [(ngModel)]="startEdit"
+        [showTime]="true"
+        appendTo="body"
+        hourFormat="24"
+        dateFormat="dd/mm/yy"
+        placeholder="Data e hora">
+      </p-calendar>
+
+      <!-- Serviços -->
+      <p-multiSelect
+        [options]="services"
+        appendTo="body"
+        optionLabel="title"
+        optionValue="id"
+        [maxSelectedLabels]="1"
+        selectedItemsLabel="{0} selecionado(s)"
+        [(ngModel)]="selectedServices"
+        defaultLabel="Selecione os serviços"/>
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <div class="btns">
+      <p-button
+        severity="success"
+        class="secondary"
+        label="Confirmar"
+        size="small"
+        (onClick)="updateSchedule()">
+      </p-button>
+
+      <p-button
+        severity="secondary"
+        class="tertiary"
+        label="Cancelar"
+        size="small"
+        (onClick)="closeEditSchedule()">
+      </p-button>
+    </div>
+  </ng-template>
+</p-dialog>

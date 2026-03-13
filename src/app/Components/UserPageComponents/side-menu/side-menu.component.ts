@@ -16,7 +16,7 @@ import { filter } from 'rxjs';
   styleUrl: './side-menu.component.css'
 })
 export class SideMenuComponent implements OnInit {
-  itens: { label:string; icon:string; router:string; class:string}[] = [];
+  itens: { label:string; icon:string; router:string; classRouter:string}[] = [];
 
   constructor(private _router:Router) {}
 
@@ -33,40 +33,42 @@ export class SideMenuComponent implements OnInit {
         label: 'Home',
         icon: 'pi pi-home',
         router: './home',
-        class: this.isRoute('/user/home')
+        classRouter: '/user/home'
       },
       {
         label: 'Agenda',
         icon: 'pi pi-calendar',
         router: './agenda',
-        class: this.isRoute('/user/agenda')
+        classRouter: '/user/agenda'
       },
       {
         label: 'Clientes',
         icon: 'pi pi-users',
         router: './clientes',
-        class: this.isRoute('/user/clientes')
+        classRouter: '/user/clientes'
       },
       {
         label: 'Serviços',
         icon: 'pi pi-briefcase',
         router: './servicos',
-        class: this.isRoute('/user/servicos')
+        classRouter: '/user/servicos'
       },
       {
         label: 'Dashboard',
         icon: 'pi pi-objects-column',
         router: './dashboard',
-        class: this.isRoute('/user/dashboard')
+        classRouter: '/user/dashboard'
       }
     ];
   }
 
-  private isRoute(router:string){
+  isRoute(router:string){
     return router === this._router.url ?
-      'secondary-btn'
+      true
       :
-      'primary-btn';
+      false;
   }
+
+
   
 }

@@ -1,8 +1,9 @@
 <div class="container">
     @for (item of itens; track item.label){
     <div class="btn">
-        <p-button [class]="item.class"
+        <p-button
             pRipple
+            [severity]="isRoute(item.classRouter) ? 'success' : 'primary'"
             [label]="item.label"
             [icon]="item.icon"
             size="small"

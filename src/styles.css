@@ -1,4 +1,5 @@
-@import "primeng/resources/themes/soho-light/theme.css";
+/*@import "primeng/resources/themes/soho-light/theme.css"; */
+@import "src/styles/theme.css";
 @import "primeng/resources/primeng.min.css";
 @import "primeicons/primeicons.css";
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
@@ -25,9 +26,10 @@ body{
   --p-contrast-contrast-color: var(--primary-color-text) !important;
 }
 
+
 /* ========================================================== */
 
-/* Primário */
+/* 
 .primary *{
     background-color: var(--primary-color);
     border: var(--primary-color);
@@ -36,7 +38,6 @@ body{
 .primary-btn .p-button {
     background-color: var(--primary-color);
     border-color: rgba(0, 0, 0, 0.847);
-    /*border: 1px var(--primary-color-text) solid ;*/
     color: var(--primary-color-text);
 }
 .primary-b .p-avatar {
@@ -59,7 +60,6 @@ body{
     background-color: var(--primary-color);
 }
 
-/* Secondário */
 .secondary *,
 .secondary-btn .p-button {
     background-color: var(--secondary-color);
@@ -67,7 +67,6 @@ body{
     color: var(--primary-color);
 }
 
-/* Terciário */
 .tertiary *,
 .tertiary-btn .p-button {
     background-color: var(--accent-color);
@@ -80,7 +79,7 @@ body{
     color: var(--primary-color-text);
 }
 
-/* General */
+
 .card-no-footer-radius  .p-card{
     box-shadow: none;
     background-color: var(--primary-color);
@@ -125,6 +124,16 @@ body{
 .calendar-primary .p-datepicker * {
     color: var(--primary-color-text);
 }
+.p-datepicker 
+.p-inputtext
+.p-datepicker-panel{
+    outline: none;
+    box-shadow: none;
+    color: var(--primary-color-text);
+    background-color: var(--primary-color);
+    border: var(--primary-color);
+    border-color: var(--primary-color);
+}
 .calendar-primary .p-datepicker {
     border-radius: 10px;
     background-color: var(--primary-color);
@@ -134,4 +143,4 @@ body{
     .card-functions .p-card{  
         max-width: 250px;
     }
-}
+}  */
