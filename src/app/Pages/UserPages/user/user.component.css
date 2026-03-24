@@ -11,15 +11,13 @@
 }
 .side-menu{
     grid-area: side;
-    border: 1px solid black;
+    border-right: 2px solid black;
 }
 .header{
     grid-area: head;
-    border: 1px solid black;
 }
 .content{
     grid-area: body;
-    border: 1px solid black;
 }
 
 @media (max-width: 800px){

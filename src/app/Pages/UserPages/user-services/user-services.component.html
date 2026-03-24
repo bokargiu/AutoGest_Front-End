@@ -6,19 +6,19 @@
                     <p-avatar
                         pRipple
                         icon="pi pi-plus"
-                        class="secondary hov-p"
+                        [style]="{backgroundColor: 'var(--secondary-color)', color: '#fff'}"
                         (click)="btnNew()">
                     </p-avatar>
                     <p-avatar
                         pRipple
                         icon="pi pi-pencil"
-                        class="secondary hov-p"
+                        [style]="{backgroundColor: 'var(--primary-color)', border: '1px solid black'}"
                         (click)="btnEdit()">
                     </p-avatar>
                     <p-avatar
                         pRipple
                         icon="pi pi-minus"
-                        class="tertiary hov-p"
+                        [style]="{backgroundColor: 'var(--accent-color)'}"
                         (click)="btnDell()">
                     </p-avatar>
                 </div>
@@ -87,7 +87,7 @@ header="Crie um novo serviço:"
                 placeholder="Titulo"
                 [(ngModel)]="serviceDTO.title">
             <p-calendar
-                class="calendar-primary"
+                appendTo="body"
                 [timeOnly]="true"
                 placeholder="Duração"
                 [(ngModel)]="serviceDTO.duration"/>
@@ -102,14 +102,14 @@ header="Crie um novo serviço:"
     <ng-template pTemplate="footer">
         <div class="btns">
             <p-button
-                class="secondary"
                 label="Confirmar e criar"
                 size="small"
+                severity="success"
                 (onClick)="creatNew()"/>
             <p-button
-                class="tertiary"
                 label="Cancelar"
                 size="small"
+                severity="secondary"
                 (onClick)="btnNew()"/>
         </div>
     </ng-template>
@@ -131,7 +131,7 @@ header="Crie um novo serviço:"
                 [placeholder]="serviceDTO.title"
                 [(ngModel)]="serviceDTO.title">
             <p-calendar
-                class="calendar-primary"
+                appendTo="body"
                 [timeOnly]="true"
                 [(ngModel)]="serviceDTO.duration"/>
             <p-inputNumber
@@ -144,14 +144,14 @@ header="Crie um novo serviço:"
     <ng-template pTemplate="footer">
         <div class="btns">
             <p-button
-                class="secondary"
                 label="Alterar"
                 size="small"
+                severity="success"
                 (onClick)="alterar()"/>
             <p-button
-                class="tertiary"
                 label="Cancelar"
                 size="small"
+                severity="secondary"
                 (onClick)="refreshTable()"/>
         </div>
     </ng-template>
@@ -172,6 +172,7 @@ header="Crie um novo serviço:"
                 [placeholder]="serviceDTO.title"
                 [disabled]="true">
             <p-calendar
+                appendTo="body"
                 [timeOnly]="true"
                 [ngModel]="serviceDTO.duration"
                 [disabled]="true"/>
@@ -189,11 +190,13 @@ header="Crie um novo serviço:"
                 class="secondary"
                 label="Excluir"
                 size="small"
+                severity="success"
                 (onClick)="dellService()"/>
             <p-button
                 class="tertiary"
                 label="Cancelar"
                 size="small"
+                severity="secondary"
                 (onClick)="refreshTable()"/>
         </div>
     </ng-template>

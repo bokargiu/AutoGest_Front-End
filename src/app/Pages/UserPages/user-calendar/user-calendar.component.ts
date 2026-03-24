@@ -1,6 +1,6 @@
 // user-calendar.component.ts
-import { Component, OnInit } from '@angular/core';
-import { CalendarEvent, CalendarModule as AngularCalendarModule } from 'angular-calendar';
+import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
+import { CalendarWeekViewBeforeRenderEvent, CalendarEvent, CalendarModule as AngularCalendarModule, CalendarWeekViewAllDayEvent } from 'angular-calendar';
 import { AvatarModule } from 'primeng/avatar';
 import { Ripple } from 'primeng/ripple';
 import { DialogModule } from 'primeng/dialog';
@@ -11,6 +11,7 @@ import * as primengCalendar from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { ButtonModule } from 'primeng/button';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 import { OrderDto, Order } from 'src/app/Interfaces/Order';
 import { OrderService } from 'src/app/Services/OrderService/order.service';
@@ -33,15 +34,27 @@ import { isSameDay, isSameMonth } from 'date-fns';
     DropdownModule,
     MultiSelectModule,
     ButtonModule,
+    OverlayPanelModule
   ],
   templateUrl: './user-calendar.component.html',
-  styleUrl: './user-calendar.component.css'
+  styleUrl: './user-calendar.component.css',
+  styles: [`
+    .cal-day-column.cal-other-month{
+      background-color: rgba(0, 0, 0, 0.066);;
+      pointer-events: none;
+    }
+    `]
 })
 export class UserCalendarComponent implements OnInit {
 
+  getFormatedTitle(){
+    let str:string = this.viewDate.toLocaleString('pt-BR', { month: 'long', year: 'numeric'}) 
+    return str.charAt(0).toLocaleUpperCase() + str.slice(1)
+  }
+
   viewDate: Date = new Date();
   activeDayIsOpen: boolean = false;
-  selecetedOrder: Order | null = null;
+  selecetedOrder!: Order;
 
   // Dialog
   scheduleV: boolean = false;
@@ -59,11 +72,9 @@ export class UserCalendarComponent implements OnInit {
 
   schedule: Order = {} as Order;
 
-  // Dados carregados da API
   clients: Client[] = [];
   services: ServiceMin[] = [];
 
-  // Orders e eventos no calendário
   orders: Order[] = [];
   events: CalendarEvent[] = [];
 
@@ -79,12 +90,11 @@ export class UserCalendarComponent implements OnInit {
     this.loadOrders();
   }
 
-  // ---------- Dialog Novo Agendamento ----------
+  // ---------- Dialog Novo ----------
 
   newScheduleDialog(): void {
     this.resetScheduleDto();
     this.scheduleV = !this.scheduleV;
-    console.log(this.services)
   }
 
   private resetScheduleDto(): void {
@@ -97,14 +107,13 @@ export class UserCalendarComponent implements OnInit {
 
   createSchedule(): void {
     if (!this.scheduleDTO.clientId || !this.scheduleDTO.start) {
-      console.error('Cliente e data/hora são obrigatórios.');
       return;
     }
-
+    this.scheduleDTO.servicesIds = this.selectedServices;
     this.orderService.post(this.scheduleDTO).subscribe({
       next: () => {
-        console.log('Agendamento criado com sucesso!');
         this.newScheduleDialog();
+        this.selectedServices = [];
         this.loadOrders();
       },
       error: (err) => {
@@ -116,6 +125,7 @@ export class UserCalendarComponent implements OnInit {
   // ---------- Carregamento de dados ----------
 
   loadClients(): void {
+    console.log(this.viewDate.toString());
     this.clientService.getAll().subscribe({
       next: (clients) => this.clients = clients,
       error: (err) => console.error(err)
@@ -132,7 +142,7 @@ export class UserCalendarComponent implements OnInit {
   
 
   loadOrders(): void {
-    this.orderService.getAll().subscribe({
+    this.orderService.getOnDate(this.viewDate).subscribe({
       next: (orders) => {
         this.orders = orders;
         this.events = this.mapOrdersToEvents(orders);
@@ -141,7 +151,7 @@ export class UserCalendarComponent implements OnInit {
     });
   }
 
-  // ---------- Conversão Order -> CalendarEvent ----------
+  // ---------- CalendarEvent ----------
 
   private mapOrdersToEvents(orders: Order[]): CalendarEvent[] {
     return orders.map(order => ({
@@ -174,20 +184,50 @@ export class UserCalendarComponent implements OnInit {
 
   closeEditSchedule(): void {
     this.editScheduleV = false;
-    this.selecetedOrder = null;
-    this.startEdit = new Date();
+    this.selecetedOrder = null as any;
+    this.startEdit = new Date(this.selecetedOrder.start);
     this.selectedServices = [];
   }
 
   updateSchedule(): void {
-
+    this.orderService.patch(this.schedule.id, {
+      start: this.startEdit,
+      clientId: this.selecetedOrder.client.id,
+      servicesIds: this.selectedServices
+    }).subscribe({
+      next: () => {
+      this.loadOrders();
+      },
+      error: (err) => console.error(err)
+    });
+    this.closeEditSchedule();
   }
 
 
   // ---------- Dialog Deletar ----------
 
   openDeleteSchedule(): void {
-    console.log('Excluir agendamento - implementar');
+    if(!this.selecetedOrder) return;
+    this.delleteScheduleV = true;
+    this.schedule = this.selecetedOrder;
+    this.startEdit = new Date(this.schedule.start);
+    this.selectedServices = this.schedule.services.map(s => s.id);
+
+  }
+  closeDeleteSchedule(): void {
+    this.delleteScheduleV = false;
+    this.selecetedOrder = null as any;
+    this.startEdit = new Date();
+    this.selectedServices = [];
+  }
+  deleteSchedule(): void {
+    this.orderService.delete(this.schedule.id).subscribe({
+      next: () => {
+        this.delleteScheduleV = false;
+        this.loadOrders();
+      },
+      error: (err) => console.error(err)
+    });
   }
 
   // -------------- Biblioteca Angular-Calendar --------------------
@@ -199,6 +239,7 @@ export class UserCalendarComponent implements OnInit {
         events.length === 0
       ) {
         this.activeDayIsOpen = false;
+        this.viewDate = date;
       } else {
         this.activeDayIsOpen = true;
         this.viewDate = date;
@@ -215,4 +256,5 @@ export class UserCalendarComponent implements OnInit {
       console.warn('Nenhuma order encontrada para o evento clicado.');
     }
   }
+
 }

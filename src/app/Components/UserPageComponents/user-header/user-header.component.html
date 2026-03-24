@@ -3,14 +3,14 @@
         <p-avatar
             pRipple
             icon="pi pi-sign-out"
-            class="tertiary"/>
+            [style]="{backgroundColor: 'var(--accent-color)'}"/>
     </nav>
     @if (isMobile()){
     <nav class="nav" (click)="sidebarVisible = true">
         <p-avatar
             pRipple
             icon="pi pi-bars"
-            class="primary"/>
+            [style]="{backgroundColor: 'var(--primary-color)'}"/>
     </nav>
     }
 </div>

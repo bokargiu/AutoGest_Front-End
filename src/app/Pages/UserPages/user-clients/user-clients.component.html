@@ -6,19 +6,19 @@
                     <p-avatar
                         pRipple
                         icon="pi pi-plus"
-                        class="secondary hov-p"
+                        [style]="{backgroundColor: 'var(--secondary-color)', color: '#fff'}"
                         (click)="btnNew()">
                     </p-avatar>
                     <p-avatar
                         pRipple
                         icon="pi pi-pencil"
-                        class="secondary hov-p"
+                        [style]="{backgroundColor: 'var(--primary-color)', border: '1px solid black'}"
                         (click)="btnEdit()">
                     </p-avatar>
                     <p-avatar
                         pRipple
                         icon="pi pi-minus"
-                        class="tertiary hov-p"
+                        [style]="{backgroundColor: 'var(--accent-color)'}"
                         (click)="btnDell()">
                     </p-avatar>
                 </div>
@@ -103,12 +103,12 @@ header="Crie um novo cliente:"
     <ng-template pTemplate="footer">
         <div class="btns">
             <p-button
-                class="secondary"
+                severity="success"
                 label="Confirmar e criar"
                 size="small"
                 (onClick)="creatNew()"/>
             <p-button
-                class="tertiary"
+                severity="secondary"
                 label="Cancelar"
                 size="small"
                 (onClick)="btnNew()"/>
@@ -141,12 +141,12 @@ header="Crie um novo cliente:"
     <ng-template pTemplate="footer">
         <div class="btns">
             <p-button
-                class="secondary"
+                severity="success"
                 label="Alterar"
                 size="small"
                 (onClick)="alterar()"/>
             <p-button
-                class="tertiary"
+                severity="secondary"
                 label="Cancelar"
                 size="small"
                 (onClick)="refreshTable()"/>
@@ -182,12 +182,12 @@ header="Crie um novo cliente:"
     <ng-template pTemplate="footer">
         <div class="btns">
             <p-button
-                class="secondary"
+                severity="success"
                 label="Excluir"
                 size="small"
                 (onClick)="dellClient()"/>
             <p-button
-                class="tertiary"
+                severity="secondary"
                 label="Cancelar"
                 size="small"
                 (onClick)="refreshTable()"/>

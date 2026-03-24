@@ -18,6 +18,9 @@
     display: flex;
     justify-content: space-evenly;
 }
+.toolbar-buttons *:hover{
+    cursor: pointer;
+}
 .list-clients{
     grid-area: clients;
     display: flex;
