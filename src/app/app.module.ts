@@ -7,12 +7,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RippleModule } from 'primeng/ripple';
 import { HttpClientModule } from '@angular/common/http';
-import { authInterceptor } from './Interceptors/auth.interceptor';
+import { authInterceptor } from './Interceptors/AuthInterceptor/auth.interceptor';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { LOCALE_ID } from '@angular/core';
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
+import { cacheInterceptor } from './Interceptors/CacheInterceptor/cache.interceptor';
 
 registerLocaleData(localePt);
 
@@ -34,7 +35,7 @@ registerLocaleData(localePt);
   providers: [
     { provide: LOCALE_ID, useValue: 'pt-BR' },
     provideHttpClient(
-      withInterceptors([authInterceptor])
+      withInterceptors([authInterceptor, cacheInterceptor])
     )
   ],
   bootstrap: [AppComponent]

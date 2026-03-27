@@ -125,7 +125,6 @@ export class UserCalendarComponent implements OnInit {
   // ---------- Carregamento de dados ----------
 
   loadClients(): void {
-    console.log(this.viewDate.toString());
     this.clientService.getAll().subscribe({
       next: (clients) => this.clients = clients,
       error: (err) => console.error(err)
@@ -142,7 +141,7 @@ export class UserCalendarComponent implements OnInit {
   
 
   loadOrders(): void {
-    this.orderService.getOnDate(this.viewDate).subscribe({
+    this.orderService.getAll().subscribe({
       next: (orders) => {
         this.orders = orders;
         this.events = this.mapOrdersToEvents(orders);
