@@ -1,1 +1,169 @@
-<p>user-dashboard works!</p>
+<div class="dashboard-root">
+  @if (loading) {
+    <div class="dashboard-loading">
+      <p-progressSpinner strokeWidth="4" ariaLabel="Carregando" />
+    </div>
+  } @else if (error) {
+    <p-card [header]="'Erro'">
+      <p class="dashboard-error">{{ error }}</p>
+      <p-button label="Tentar de novo" icon="pi pi-refresh" (onClick)="retry()" />
+    </p-card>
+  } @else {
+    <header class="dashboard-page-head">
+      <div>
+        <h1 class="dashboard-title">Dashboard</h1>
+        <p class="dashboard-subtitle">
+          Estatísticas, previsões com base nos agendamentos e médias de valor.
+        </p>
+      </div>
+    </header>
+
+    <p-divider />
+
+    <section class="dashboard-section">
+      <h2 class="dashboard-section-title">Visão geral</h2>
+      <div class="dashboard-cards">
+        <p-card header="Clientes">
+          <p class="dashboard-stat">{{ clientCount }}</p>
+          <p class="dashboard-stat-label">Cadastrados</p>
+          <p-button
+            label="Gerenciar"
+            icon="pi pi-users"
+            [routerLink]="['../clientes']"
+            styleClass="dashboard-card-btn"
+          />
+        </p-card>
+
+        <p-card header="Serviços">
+          <p class="dashboard-stat">{{ serviceCount }}</p>
+          <p class="dashboard-stat-label">No catálogo</p>
+          <p-button
+            label="Gerenciar"
+            icon="pi pi-briefcase"
+            [routerLink]="['../servicos']"
+            styleClass="dashboard-card-btn"
+          />
+        </p-card>
+
+        <p-card header="Agendamentos">
+          <p class="dashboard-stat">{{ orderCount }}</p>
+          <p class="dashboard-stat-label">Total registrados</p>
+          <p-button
+            label="Agenda"
+            icon="pi pi-calendar"
+            [routerLink]="['../agenda']"
+            styleClass="dashboard-card-btn"
+          />
+        </p-card>
+
+        <p-card 
+          header="Próximos"
+          [style]="{'background-color': 'var(--secondary-color)', 'color': 'aliceblue'}"
+        >
+          <p class="dashboard-stat">{{ upcomingCount }}</p>
+          <p class="dashboard-stat-label">A partir de hoje</p>
+        </p-card>
+      </div>
+    </section>
+
+    <p-divider />
+
+    <section class="dashboard-section">
+      <h2 class="dashboard-section-title">Previsões e receita</h2>
+      <p class="dashboard-hint">
+        Valores futuros somam apenas o que já está agendado no sistema (próximos 7 e 30 dias).
+      </p>
+      <div class="dashboard-cards dashboard-cards--wide">
+        <p-card header="Receita (últimos 30 dias)">
+          <p class="dashboard-stat dashboard-stat--currency">
+            {{ formatCurrency(revenuePast30Days) }}
+          </p>
+          <p class="dashboard-stat-label">Com base na data de início dos agendamentos</p>
+        </p-card>
+
+        <p-card header="Previsto — próximos 30 dias">
+          <p class="dashboard-stat dashboard-stat--currency">
+            {{ formatCurrency(revenueScheduledNext30Days) }}
+          </p>
+          <p class="dashboard-stat-label">Soma dos valores já agendados</p>
+        </p-card>
+
+        <p-card header="Previsto — próximos 7 dias">
+          <p class="dashboard-stat dashboard-stat--currency">
+            {{ formatCurrency(revenueScheduledNext7Days) }}
+          </p>
+          <p class="dashboard-stat-label">Curto prazo</p>
+        </p-card>
+      </div>
+    </section>
+
+    <p-divider />
+
+    <section class="dashboard-section">
+      <h2 class="dashboard-section-title">Ritmo e ticket médio</h2>
+      <div class="dashboard-cards dashboard-cards--trend">
+        <p-card header="Média semanal (28 dias)">
+          <p class="dashboard-stat">{{ avgOrdersPerWeekLast4Weeks | number : '1.1-1' }}</p>
+          <p class="dashboard-stat-label">Agendamentos por semana</p>
+        </p-card>
+
+        <p-card header="Ticket médio (30 dias)">
+          <p class="dashboard-stat dashboard-stat--currency">
+            {{ formatCurrency(avgTicketLast30Days) }}
+          </p>
+          <p class="dashboard-stat-label">
+            @if (ordersCountPast30Days === 0) {
+              Nenhum agendamento com início nos últimos 30 dias.
+            } @else {
+              Média entre {{ ordersCountPast30Days }} agendamento(s) com início nesse período.
+            }
+          </p>
+        </p-card>
+      </div>
+    </section>
+
+    <p-divider />
+
+    <section class="dashboard-section dashboard-section--table">
+      <div class="dashboard-table-head">
+        <h2 class="dashboard-section-title">Próximos na agenda</h2>
+        <p-button
+          label="Abrir agenda"
+          icon="pi pi-calendar"
+          [routerLink]="['../agenda']"
+        />
+      </div>
+
+      @if (upcomingOrders.length === 0) {
+        <p-card>
+          <p class="dashboard-empty">Nenhum agendamento a partir de hoje.</p>
+        </p-card>
+      } @else {
+        <div class="dashboard-table-scroll">
+          <p-table
+            [value]="upcomingOrders"
+            [paginator]="true"
+            [rows]="6"
+            dataKey="id"
+            class="p-datatable-sm"
+          >
+            <ng-template pTemplate="header">
+              <tr>
+                <th style="width: 40%">Cliente</th>
+                <th style="width: 35%">Início</th>
+                <th style="width: 25%">Valor</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-row>
+              <tr>
+                <td class="col-break">{{ row.client?.name }}</td>
+                <td>{{ formatDateTime(row.start) }}</td>
+                <td>{{ row.totalPrice | number : '1.2-2' }}</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      }
+    </section>
+  }
+</div>

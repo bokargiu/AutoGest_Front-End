@@ -3,6 +3,9 @@ import { Button } from "primeng/button";
 import { CommonModule } from '@angular/common';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter } from 'rxjs';
+import { DividerModule } from "primeng/divider";
+import { MenubarModule } from "primeng/menubar";
+import { Ripple } from "primeng/ripple";
 
 @Component({
   selector: 'app-side-menu',
@@ -10,7 +13,10 @@ import { filter } from 'rxjs';
   imports: [
     CommonModule,
     Button,
-    RouterModule
+    RouterModule,
+    DividerModule,
+    MenubarModule,
+    Ripple
 ],
   templateUrl: './side-menu.component.html',
   styleUrl: './side-menu.component.css'

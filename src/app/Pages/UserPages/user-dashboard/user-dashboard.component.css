@@ -1,0 +1,140 @@
+:host {
+  display: block;
+  height: 100%;
+  min-height: 0;
+}
+.dashboard-root {
+  height: 100%;
+  min-height: 0;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0.75rem 1.5rem 2rem;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.dashboard-loading {
+  display: flex;
+  justify-content: center;
+  padding: 3rem;
+}
+
+.dashboard-page-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.dashboard-title {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.dashboard-subtitle {
+  margin: 0.35rem 0 0;
+  font-size: 0.9rem;
+  color: var(--secondary-color-text, #6b7280);
+  max-width: 36rem;
+}
+
+.dashboard-section {
+  margin-top: 0.5rem;
+}
+
+.dashboard-section--table {
+  padding-bottom: 0.5rem;
+}
+
+.dashboard-section-title {
+  margin: 0 0 0.75rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.dashboard-hint {
+  margin: -0.25rem 0 0.75rem;
+  font-size: 0.85rem;
+  color: var(--secondary-color-text, #6b7280);
+}
+
+.dashboard-cards {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.dashboard-cards--wide {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.dashboard-cards--trend {
+  grid-template-columns: 1fr 1fr;
+}
+
+.dashboard-stat {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.dashboard-stat--currency {
+  font-size: 1.5rem;
+}
+
+.dashboard-stat-label {
+  margin: 0.25rem 0 0.75rem;
+  font-size: 0.9rem;
+  color: var(--primary-color-text);
+}
+
+.dashboard-card-btn {
+  margin-top: 0.25rem;
+}
+
+.dashboard-error {
+  margin: 0 0 1rem;
+}
+
+.dashboard-table-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.dashboard-table-head .dashboard-section-title {
+  margin: 0;
+}
+
+.dashboard-empty {
+  margin: 0;
+  color: var(--secondary-color-text, #6b7280);
+}
+
+.dashboard-table-scroll {
+  overflow-x: auto;
+}
+
+@media (max-width: 900px) {
+  .dashboard-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .dashboard-cards--wide {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-cards,
+  .dashboard-cards--trend {
+    grid-template-columns: 1fr;
+  }
+}
