@@ -43,7 +43,7 @@
             [value]="clients"
             [metaKeySelection]="true"
             [scrollable]="true"
-            [scrollHeight]="'400px'"
+            [scrollHeight]="'500px'"
             styleClass="p-datatable-striped"
             [(selection)]="selectedClient"
             [selectionMode]="'single'"
@@ -63,7 +63,7 @@
             </ng-template>
             <ng-template pTemplate="body" let-client>
                 <tr [pSelectableRow]="client">
-                    <th>{{client.name}}</th>
+                    <th  class="col-break">{{client.name}}</th>
                     <th>{{client.number}}</th>
                     <th>
                         <p-rating 

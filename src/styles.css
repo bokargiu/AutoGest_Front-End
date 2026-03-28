@@ -15,6 +15,7 @@ body{
   --accent-color: #FF6F61 !important; /* Pantone Living Coral */
 
   --primary-color-text: #000000 !important;
+  --secondary-color-text: rgba(42, 42, 42, 0.815);
 }
 :root {
   --p-primary-color: var(--primary-color) !important;
@@ -27,121 +28,17 @@ body{
   --p-contrast-contrast-color: var(--primary-color-text) !important;
 }
 
-
-/* ========================================================== */
-
-/* 
-.primary *{
-    background-color: var(--primary-color);
-    border: var(--primary-color);
-    color: var(--primary-color-text);
+.col-break {
+  max-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
-.primary-btn .p-button {
-    background-color: var(--primary-color);
-    border-color: rgba(0, 0, 0, 0.847);
-    color: var(--primary-color-text);
+.p-datatable .p-datatable-table {
+  table-layout: fixed;
 }
-.primary-b .p-avatar {
-    background-color: var(--primary-color);
-    border: 2px solid rgba(0, 0, 0, 0.71);
-    color: var(--primary-color-text);
+.p-datatable-thead > tr > th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
-.primary-head .p-menubar{
-    background-color: var(--primary-color);
-    border: var(--primary-color);
-    color: var(--primary-color-text);
-    border-radius: 0px;
-}
-.primary-card .p-card{
-    background-color: var(--primary-color);
-    border: var(--primary-color);
-    color: var(--primary-color-text);
-}
-.primary-side .p-sidebar{
-    background-color: var(--primary-color);
-}
-
-.secondary *,
-.secondary-btn .p-button {
-    background-color: var(--secondary-color);
-    border: var(--secondary-color);
-    color: var(--primary-color);
-}
-
-.tertiary *,
-.tertiary-btn .p-button {
-    background-color: var(--accent-color);
-    border: var(--accent-color);
-    color: var(--primary-color);
-}
-
-.tertiary-black *{
-    background-color: var(--accent-color);
-    color: var(--primary-color-text);
-}
-
-
-.card-no-footer-radius  .p-card{
-    box-shadow: none;
-    background-color: var(--primary-color);
-    border-bottom-left-radius: 0px; 
-    border-bottom-right-radius: 0px;
-    margin: 0px;
-
-    min-height: 250px;
-    max-height: 300px;
-    min-width: 250px;
-    max-width: 750px;
-}
-.card-functions .p-card{
-    background-color: var(--primary-color);
-    border: none;
-    box-shadow: none;
-    max-width: 450px;
-    min-height: 0vh;
-    color: black;
-    font-family: monospace;
-}
-.card-hover .p-card{
-    transition: all 0.3s ease;
-}
-.card-hover:hover .p-card{
-    transform: translateY(-8px);
-    box-shadow: 0 1px 25px rgba(0, 0, 0, 0.041);
-}
-.w-full .input{
-    width: 100%;
-}
-.hov-p:hover *{
-    cursor: pointer;
-}
-.calendar-primary * div {
-    padding: 0px;
-    margin: 0px;
-    border-radius: 10px;
-    background-color: whitesmoke;
-    color: var(--primary-color-text);
-}
-.calendar-primary .p-datepicker * {
-    color: var(--primary-color-text);
-}
-.p-datepicker 
-.p-inputtext
-.p-datepicker-panel{
-    outline: none;
-    box-shadow: none;
-    color: var(--primary-color-text);
-    background-color: var(--primary-color);
-    border: var(--primary-color);
-    border-color: var(--primary-color);
-}
-.calendar-primary .p-datepicker {
-    border-radius: 10px;
-    background-color: var(--primary-color);
-    border: 2px solid var(--primary-color-text);
-}
-@media (max-width: 768px){
-    .card-functions .p-card{  
-        max-width: 250px;
-    }
-}  */

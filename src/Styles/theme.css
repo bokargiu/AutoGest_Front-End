@@ -3060,7 +3060,7 @@
   .p-paginator .p-paginator-last {
     background-color: transparent;
     border: 0 none;
-    color: #f6f6f4;
+    color: #131313;
     min-width: 2.5rem;
     height: 2.5rem;
     margin: 0.143rem;
@@ -3073,7 +3073,7 @@
   .p-paginator .p-paginator-last:not(.p-disabled):not(.p-highlight):hover {
     background: rgb(226.577027027, 222.7872972973, 213.312972973);
     border-color: transparent;
-    color: #131313;
+    color: rgb(18.43, 18.43, 18.43);
   }
   .p-paginator .p-paginator-first {
     border-top-left-radius: 50%;
@@ -3101,7 +3101,7 @@
   .p-paginator .p-paginator-current {
     background-color: transparent;
     border: 0 none;
-    color: #f6f6f4;
+    color: #131313;
     min-width: 2.5rem;
     height: 2.5rem;
     margin: 0.143rem;
@@ -3110,7 +3110,7 @@
   .p-paginator .p-paginator-pages .p-paginator-page {
     background-color: transparent;
     border: 0 none;
-    color: #f6f6f4;
+    color: #131313;
     min-width: 2.5rem;
     height: 2.5rem;
     margin: 0.143rem;
@@ -3125,7 +3125,7 @@
   .p-paginator .p-paginator-pages .p-paginator-page:not(.p-highlight):hover {
     background: rgb(226.577027027, 222.7872972973, 213.312972973);
     border-color: transparent;
-    color: #131313;
+    color: rgb(18.43, 18.43, 18.43);
   }
   .p-picklist .p-picklist-buttons {
     padding: 1.25rem;

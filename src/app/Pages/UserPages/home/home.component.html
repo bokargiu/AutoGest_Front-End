@@ -1,2 +1,88 @@
-<div class="container">
+<div class="home-wrap">
+  @if (loading) {
+    <div class="home-loading">
+      <p-progressSpinner strokeWidth="4" ariaLabel="Carregando" />
+    </div>
+  } @else if (error) {
+    <p-card [header]="'Erro'">
+      <p class="home-error">{{ error }}</p>
+      <p-button label="Tentar de novo" icon="pi pi-refresh" (onClick)="ngOnInit()" />
+    </p-card>
+  } @else {
+    <section class="home-cards">
+      <p-card header="Próximos agendamentos">
+        <p class="home-stat">{{ upcomingCount }}</p>
+        <p class="home-stat-label">A partir de hoje</p>
+        <p-button
+          label="Abrir agenda"
+          icon="pi pi-calendar"
+          [routerLink]="['../agenda']"
+        />
+      </p-card>
+
+      <p-card header="Clientes">
+        <p class="home-stat">{{ clientCount }}</p>
+        <p class="home-stat-label">Cadastrados</p>
+        <p-button
+          label="Gerenciar"
+          icon="pi pi-users"
+          [routerLink]="['../clientes']"
+        />
+      </p-card>
+
+      <p-card header="Serviços">
+        <p class="home-stat">{{ serviceCount }}</p>
+        <p class="home-stat-label">Catálogo</p>
+        <p-button
+          label="Gerenciar"
+          icon="pi pi-briefcase"
+          [routerLink]="['../servicos']"
+        />
+      </p-card>
+    </section>
+
+    <section class="home-table-block">
+      <div class="home-table-head">
+        <h2>Próximos na agenda</h2>
+        <p-button
+          label="Dashboard"
+          icon="pi pi-objects-column"
+          [routerLink]="['../dashboard']"
+          [outlined]="true"
+        />
+      </div>
+
+      @if (upcomingOrders.length === 0) {
+        <p-card>
+          <p class="home-empty">Nenhum agendamento a partir de hoje.</p>
+        </p-card>
+      } @else {
+        <div class="table-scroll">
+            <p-table 
+                [value]="upcomingOrders" 
+                [paginator]="true"
+                [rows]="4"
+                dataKey="id"
+                class="p-datatable-sm">
+            <ng-template pTemplate="header">
+                <tr>
+                <th style="width: 40%;">Cliente</th>
+                <th style="width: 30%">Início</th>
+                <th style="width: 30%">Valor</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-row>
+                <tr>
+                <td class="col-break">{{ row.client?.name }}</td>
+                <td>{{ formatDateTime(row.start) }}</td>
+                <td>
+                    {{ row.totalPrice | number : '1.2-2' }}
+                </td>
+                </tr>
+            </ng-template>
+            </p-table>
+        </div>
+      }
+    </section>
+  }
 </div>

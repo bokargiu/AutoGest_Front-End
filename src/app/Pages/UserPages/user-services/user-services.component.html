@@ -63,7 +63,7 @@
             </ng-template>
             <ng-template pTemplate="body" let-service>
                 <tr [pSelectableRow]="service">
-                    <th>{{service.title}}</th>
+                    <th class="col-break">{{service.title}}</th>
                     <th>{{getDuration(service.durationMin) | date:'HH:mm'}}</th>
                     <th>{{service.price | currency:'BRL'}}</th>
                 </tr>
