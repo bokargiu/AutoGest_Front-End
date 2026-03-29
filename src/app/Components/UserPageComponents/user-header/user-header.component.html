@@ -1,3 +1,24 @@
+@if(opVisible){
+    <div class="op-container" role="dialog" aria-modal="true" aria-label="Menu">
+        <div class="op-backdrop" (click)="opVisible = false">
+            <div class="op-buttons">
+                @for(op of options; track op.label){
+                    <p-button
+                        pRipple
+                        [label]="op.label"
+                        [severity]="iAmHere(op.classRouter) ? 'success' : 'primary'"
+                        [icon]="op.icon"
+                        [style]="{
+                            'width': '50vw'
+                        }"
+                        [routerLink]="op.router"
+                    />
+                }
+            </div>
+        </div>
+    </div>
+}
+
 <div class="container">
     <nav class="nav" (click)="logout()">
         <p-avatar
@@ -5,8 +26,8 @@
             icon="pi pi-sign-out"
             [style]="{backgroundColor: 'var(--accent-color)'}"/>
     </nav>
-    @if (isMobile()){
-    <nav class="nav" (click)="sidebarVisible = true">
+    @if (isMobile){
+    <nav class="nav" (click)="opVisible = true">
         <p-avatar
             pRipple
             icon="pi pi-bars"
@@ -15,6 +36,4 @@
     }
 </div>
 
-<p-sidebar [(visible)]="sidebarVisible" [style]="{'width': '40vw'}" class="primary-side">
-    <app-side-menu/>
-</p-sidebar>
+

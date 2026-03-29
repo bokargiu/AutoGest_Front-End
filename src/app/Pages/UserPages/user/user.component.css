@@ -21,14 +21,11 @@
     min-height: 0;
 }
 
-@media (max-width: 800px){
+@media (max-width: 768px){
     .container{
         grid-template-areas: 
             "head"
             "body";
         grid-template-columns: 1fr;
-    }
-    .side-menu{
-        display: none;
     }
 }

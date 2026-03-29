@@ -38,7 +38,6 @@ export class UserDashboardComponent implements OnInit {
   upcomingCount = 0;
 
   revenuePast30Days = 0;
-  /** Média de totalPrice entre agendamentos com início nos últimos 30 dias (até agora). */
   avgTicketLast30Days = 0;
   ordersCountPast30Days = 0;
   revenueScheduledNext30Days = 0;

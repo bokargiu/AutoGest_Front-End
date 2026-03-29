@@ -1,7 +1,9 @@
 <div class="container">
-    <div class="side-menu">
-        <app-side-menu/>
-    </div>
+    @if(!isMobile){
+        <div class="side-menu">
+            <app-side-menu/>
+        </div>
+    }
     <div class="header">
         <app-user-header/>
     </div>

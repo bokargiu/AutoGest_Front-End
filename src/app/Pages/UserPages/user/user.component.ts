@@ -15,6 +15,10 @@ import { UserHeaderComponent } from "src/app/Components/UserPageComponents/user-
   styleUrl: './user.component.css'
 })
 export class UserComponent {
-  mobileSelected: boolean = false;
+ isMobile = isMobile();
+}
 
+
+export function isMobile(): boolean{
+  return window.innerWidth <= 768;
 }
