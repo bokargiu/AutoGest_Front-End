@@ -35,20 +35,24 @@
     border-bottom-right-radius: 0px;
     padding: 10px;
 
-    min-height: 150px;
     max-height: 300px;
-    min-width: 250px;
     max-width: 750px;
-    overflow: hidden;
 }
-.hero-img img{
+.img-container{
+    max-width: 740px;
+    max-height: 300px;
+    box-shadow: 1px 2px 20px rgba(55, 55, 55, 0.216); 
+    z-index: 1;
+}
+.img-container img{
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    object-position: center;
+    max-height: 290px;
+    object-fit: contain;
+    border-radius: 4px; 
 }
 .functions{
-    min-height: 600px;
+    min-height: 500px;
     display: grid;
     align-content: center;
     grid-template-columns: 1fr 1fr 1fr;
@@ -58,26 +62,63 @@
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
+    border-radius: 0;
+}
+.card-functions{
+    border-radius: 5px;
+    margin: 10px;
+    transition: 1s;
+    /* box-shadow: 0px 0px 20px rgba(191, 189, 184, 0.051); */
+}
+.card-functions:hover{
+    box-shadow: 1px 1px 20px rgba(100, 133, 92, 0.071);
+}
+.card-functions *{
+    max-width: 400px;
 }
 .central-card img{
-    width: 100%;
     border-radius: 5px;
     box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.134);
 }
 .central-card h2{
     min-height: 60px;
+    margin: 5px;
+    cursor: default;
 }
 .central-card p{
     min-height: 60px;
+    margin: 5px;
+    cursor: default;
 }
 
 @media (max-width: 768px) {
-    .functions{
-        min-height: 750px;
-        align-items: center;
+    .hero{
         justify-content: space-evenly;
+    }
+    .hero-img {
+        display: none;
+    }
+    .functions{
+        margin: 30px;
+        gap: 25px;
+        min-height: 750px;
         grid-template-columns: 1fr;
         grid-template-rows: 1fr 1fr 1fr;
     }
+    .card-functions *{
+        max-width: 80vw;
+    }
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+    .functions{
+        margin: 30px;
+        min-height: 750px;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+    }
+    .card-functions *{
+        max-width: 80vw;
+    }
+    
 }

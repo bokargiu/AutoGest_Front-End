@@ -1,23 +1,12 @@
-
 <div class="container">
-  <div class="calendar-container">
-    <p-button (click)="op.toggle($event)" size="small">
-      <h2>{{getFormatedTitle()}}</h2>
-    </p-button>
   
-      <p-overlayPanel
-        #op
-        [dismissable]="true">
-        <p-calendar
-          [(ngModel)]="viewDate"
-          inline="true"
-          view="month"
-          dateFormat="mm/yy"
-          (onSelect)="op.toggle($event)"
-          (onSelect)="loadOrders()"/>
-      </p-overlayPanel>
-    
+    <div class="date-selector">
+      <p-button (click)="op.toggle($event)" size="small">
+        <h3>{{getFormatedTitle()}}</h3>
+      </p-button>
+    </div>
 
+  <div class="calendar-container">
     <div class="calendar">
       <mwl-calendar-month-view
         [viewDate]="viewDate"
@@ -36,7 +25,7 @@
               <span class="cal-day-number">{{day.date.getDate()}}</span>
             }
             @else {
-              <div style="width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.066);"></div>
+              <div style="width: 100%; height: 100%; background-color: rgba(135, 116, 116, 0.066);"></div>
             }
           </div>
         </ng-template>
@@ -45,41 +34,42 @@
   </div>
 
   <div class="options">
-    <!-- Novo agendamento -->
-    <nav>
-      <p-avatar
-        pRipple
-        size="large"
-        [style]="{ backgroundColor: 'var(--secondary-color)', color: '#fff'}"
-        icon="pi pi-calendar-plus"
-        class="secondary hov-p"
-        (click)="newScheduleDialog()">
-      </p-avatar>
-    </nav>
+      <!-- Novo agendamento -->
+      <nav>
+        <p-avatar
+          pRipple
+          size="large"
+          [style]="{ backgroundColor: 'var(--secondary-color)', color: '#fff'}"
+          icon="pi pi-calendar-plus"
+          class="secondary hov-p"
+          (click)="newScheduleDialog()">
+        </p-avatar>
+      </nav>
 
-    <!-- Editar agendamento -->
-    <nav>
-      <p-avatar
-        pRipple
-        size="large"
-        [style]="{ backgroundColor: 'var(--primary-color)', border: '1px solid black'}"
-        icon="pi pi-pencil"
-        class="primary-b hov-p"
-        (click)="openEditSchedule()">
-      </p-avatar>
-    </nav>
+      <!-- Editar agendamento -->
+      <nav>
+        <p-avatar
+          pRipple
+          size="large"
+          [style]="{ backgroundColor: 'var(--primary-color)', border: '1px solid black'}"
+          icon="pi pi-pencil"
+          class="primary-b hov-p"
+          (click)="openEditSchedule()">
+        </p-avatar>
+      </nav>
 
-    <!-- Cancelar/Excluir agendamento -->
-    <nav>
-      <p-avatar
-        pRipple
-        size="large"
-        [style]="{ backgroundColor: 'var(--accent-color)'}"
-        icon="pi pi-calendar-times"
-        class="tertiary-black hov-p"
-        (click)="openDeleteSchedule()">
-      </p-avatar>
-    </nav>
+      <!-- Cancelar/Excluir agendamento -->
+      <nav>
+        <p-avatar
+          pRipple
+          size="large"
+          [style]="{ backgroundColor: 'var(--accent-color)'}"
+          icon="pi pi-calendar-times"
+          class="tertiary-black hov-p"
+          (click)="openDeleteSchedule()">
+        </p-avatar>
+      </nav>
+    
   </div>
 
   <div class="agenda">
@@ -103,7 +93,17 @@
   </div>
 </div>
 
-
+<p-overlayPanel
+  #op
+  [dismissable]="true">
+  <p-calendar
+    [(ngModel)]="viewDate"
+    inline="true"
+    view="month"
+    dateFormat="mm/yy"
+    (onSelect)="op.toggle($event)"
+    (onSelect)="loadOrders()"/>
+</p-overlayPanel>
 
 <!-- Novo Agendamento -->
 <p-dialog
@@ -112,7 +112,7 @@
   [modal]="true"
   [closable]="false"
   [style]="{ width: '25vw', height: '60vh'}"
-  [breakpoints]="{ '800px': '90vw' }">
+  [breakpoints]="{ '800px': '90vw', '1024px': '65vw' }">
 
   <ng-template pTemplate="content">
     <div class="field">
@@ -178,7 +178,7 @@
   [modal]="true"
   [closable]="false"
   [style]="{ width: '25vw', height: '60vh'}"
-  [breakpoints]="{ '800px': '90vw' }">
+  [breakpoints]="{ '800px': '90vw', '1024px': '65vw' }">
 
   <ng-template pTemplate="content">
     <div class="field">
@@ -244,7 +244,7 @@
   [modal]="true"
   [closable]="false"
   [style]="{ width: '25vw', height: '60vh'}"
-  [breakpoints]="{ '800px': '90vw' }">
+  [breakpoints]="{ '800px': '90vw', '1024px': '65vw' }">
 
   <ng-template pTemplate="content">
     <div class="field">

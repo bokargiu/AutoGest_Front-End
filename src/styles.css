@@ -42,3 +42,51 @@ body{
   top: 0;
   z-index: 1;
 }
+.p-menubar .p-menubar-button{
+  color: #000000;
+}
+
+/* == MONTH == WEEK == */
+
+.cal-month-view {
+  border-radius: 5px;
+  background-color: color-mix(in srgb, var(--primary-color) 90%, rgba(0, 0, 0, 0.595) 10%);
+}
+.cal-month-view .cal-days .cal-cell-row:hover,
+.cal-month-view .cal-days,
+.cal-week-view .cal-time-label-column,
+.cal-week-view{
+  background-color: var(--primary-color);
+}
+
+.cal-month-view .cal-day-cell:not(:last-child) {
+  border-right: 1px solid rgba(0, 0, 0, 0.219);
+}
+[dir=rtl] .cal-month-view .cal-day-cell:not(:last-child) {
+  border-right: initial;
+  border-left: 1px solid rgba(0, 0, 0, 0.219);
+}
+.cal-month-view .cal-days .cal-cell-row {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.219);
+}
+.cal-month-view .cal-open-day-events > div{
+  padding: 2px;
+}
+.cal-month-view .cal-open-day-events{
+  max-height: 60px;
+  padding: 2px;
+  overflow-y: auto !important;
+}
+
+.cal-month-view .cal-day-cell :hover,
+.cal-month-view .cal-cell.cal-has-events.cal-open,
+.cal-month-view .cal-cell-row:hover,
+.cal-week-view .cal-day-headers,
+.cal-week-view .cal-time-events .cal-day-columns:not(.cal-resize-active) .cal-hour-segment:hover,
+.cal-week-view .cal-day-headers .cal-header:hover,
+.cal-week-view .cal-day-headers .cal-drag-over {
+  background-color: color-mix(in srgb, var(--primary-color) 90%, rgba(0, 0, 0, 0.595) 10%);
+}
+.cal-week-view .cal-hour-odd{
+  background-color: color-mix(in srgb, var(--primary-color) 90%, rgba(0, 0, 0, 0.595) 5%);
+}

@@ -8,18 +8,20 @@
         </div>
 
         <div class="hero-img">
-            <img src="assets/Images/AutoGest homePage.png"/>
+            <div class="img-container">
+                <img src="assets/Images/UserHomePage.png"/>
+            </div>
         </div>
     </section>
     <section class="functions">
         <div *ngFor="let card of cardsFunctions" class="central-card">
-            <p-card pRipple class="card-functions card-hover">
+            <div pRipple class="card-functions">
                 <img [src]="card.img">
-                <ng-template pTemplate="content">
+                <div>
                     <h2>{{card.title}}</h2>
                     <p>{{card.txt}}</p>
-                </ng-template>
-            </p-card>
+                </div>
+            </div>
         </div>
     </section>
 </div>
