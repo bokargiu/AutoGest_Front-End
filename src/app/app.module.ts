@@ -43,3 +43,5 @@ registerLocaleData(localePt);
 export class AppModule {
   
  }
+
+ export const baseAPI:string = "https://bokargiu.com.br/autogest"

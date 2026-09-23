@@ -70,7 +70,13 @@
               "buildTarget": "AutoGestFront:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+          "options": {
+            "allowedHosts": [
+              "bokargiu.com.br",
+              "www.bokargiu.com.br"
+            ]
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
