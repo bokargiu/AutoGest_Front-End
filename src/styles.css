@@ -1,5 +1,5 @@
 /*@import "primeng/resources/themes/soho-light/theme.css"; */
-@import "src/Styles/theme.css";
+@import "src/styles/theme.css";
 @import "primeng/resources/primeng.min.css";
 @import "primeicons/primeicons.css";
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
