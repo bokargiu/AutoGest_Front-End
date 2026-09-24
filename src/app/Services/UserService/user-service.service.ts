@@ -11,7 +11,7 @@ export class UserServiceService {
   constructor(private http:HttpClient) { }
 
   SingUpAndLogin(user:string, email:string, password:string): Observable<any> {
-    return this.http.post(baseAPI+'/api/User/SingUp', {
+    return this.http.post<any>(baseAPI+'/api/User/SingUp', {
       "username": user,
       "email": email,
       "password": password
