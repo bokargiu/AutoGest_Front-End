@@ -6,6 +6,7 @@ import { baseAPI } from 'src/app/app.module';
 @Injectable({
   providedIn: 'root'
 })
+
 export class UserServiceService {
 
   constructor(private http:HttpClient) { }
@@ -18,11 +19,11 @@ export class UserServiceService {
     });
   }
 
-  Login(nameOrEmail:string, password:string): Observable<any>{
-    return this.http.post<any>(baseAPI+'/api/User/Login', {
-        "NameOrEmail": nameOrEmail,
-        "Password": password
-      }
-    )
+  Login(dto: LoginDTO): Observable<any>{
+    return this.http.post<any>(baseAPI+'/api/User/Login', dto)
   }
+}
+export interface LoginDTO {
+  nameOrEmail: string;
+  password: string;
 }

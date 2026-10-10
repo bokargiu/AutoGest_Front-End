@@ -12,7 +12,7 @@ import { PasswordModule } from 'primeng/password';
 import { Button } from "primeng/button";
 import { DividerModule } from "primeng/divider";
 import { Router, RouterLink } from "@angular/router";
-import { UserServiceService } from 'src/app/Services/UserService/user-service.service';
+import { LoginDTO, UserServiceService } from 'src/app/Services/UserService/user-service.service';
 import { AuthService } from 'src/app/Services/AuthService/auth.service';
 
 @Component({
@@ -50,7 +50,11 @@ export class LoginPageComponent implements OnInit {
   }
 
   Login(){
-    this._user.Login(this.user, this.password).subscribe({
+    const loginDTO: LoginDTO = {
+      nameOrEmail: this.user,
+      password: this.password
+    };
+    this._user.Login(loginDTO).subscribe({
       next: (response) => {
         localStorage.setItem('token', response.result);
         this.router.navigate(['/user']);
