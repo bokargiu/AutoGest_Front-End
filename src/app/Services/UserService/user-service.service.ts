@@ -20,8 +20,6 @@ export class UserServiceService {
   }
 
   Login(dto: LoginDTO): Observable<any>{
-    console.log('Objeto antes do POST:', dto);
-    console.log('JSON serializado:', JSON.stringify(dto));
     return this.http.post<any>(baseAPI+'/api/User/Login', dto)
   }
 }
