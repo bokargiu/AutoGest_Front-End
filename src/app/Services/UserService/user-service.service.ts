@@ -12,15 +12,15 @@ export class UserServiceService {
 
   SingUpAndLogin(user:string, email:string, password:string): Observable<any> {
     return this.http.post<any>(baseAPI+'/api/User/SingUp', {
-      "username": user,
+      "name": user,
       "email": email,
       "password": password
     });
   }
 
-  Login(userOrEmail:string, password:string): Observable<any>{
+  Login(nameOrEmail:string, password:string): Observable<any>{
     return this.http.post<any>(baseAPI+'/api/User/Login', {
-        "userOrEmail": userOrEmail,
+        "nameOrEmail": nameOrEmail,
         "password": password
       }
     )
