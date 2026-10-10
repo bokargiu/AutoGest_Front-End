@@ -8,7 +8,6 @@ RUN npm ci
 
 COPY . .
 RUN npm run build -- --configuration production
-RUN find /app/dist -maxdepth 4 -type f -name index.html
 
 # Execução da aplicação
 FROM node:20-alpine
