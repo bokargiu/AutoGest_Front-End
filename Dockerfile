@@ -1,24 +1,23 @@
-
-# Etapa 1: compilar o Angular
-FROM node:20 AS build
+# Compilação do Angular
+FROM node:20-alpine AS build
 
 WORKDIR /app
 
-COPY package.json package-lock.json ./
+COPY package*.json ./
 RUN npm ci
 
 COPY . .
+RUN npm run build -- --configuration production
 
-RUN npm run build -- --configuration production \
-    && INDEX_FILE="$(find /app/dist -type f -name index.html -not -path '*/server/*' -print -quit)" \
-    && test -n "$INDEX_FILE" \
-    && mkdir -p /webroot \
-    && cp -a "$(dirname "$INDEX_FILE")"/. /webroot/
+# Execução da aplicação
+FROM node:20-alpine
 
-# Etapa 2: servir os arquivos compilados
-FROM nginx:alpine
+WORKDIR /app
 
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY --from=build /webroot/ /usr/share/nginx/html/
+RUN npm install -g serve
+
+COPY --from=build /app/dist/NOME_DO_PROJETO/browser/ ./dist/
 
 EXPOSE 4200
+
+CMD ["serve", "-s", "dist", "-l", "4200"]
