@@ -54,7 +54,6 @@ export class LoginPageComponent implements OnInit {
       nameOrEmail: this.user,
       password: this.password
     };
-    alert('VERSÃO NOVA DO LOGIN');
     this._user.Login(loginDTO).subscribe({
       next: (response) => {
         localStorage.setItem('token', response.result);
