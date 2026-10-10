@@ -16,7 +16,7 @@ WORKDIR /app
 
 RUN npm install -g serve
 
-COPY --from=build /app/dist/NOME_DO_PROJETO/browser/ ./dist/
+COPY --from=build /app/dist/auto-gest-front/browser/ ./dist/
 
 EXPOSE 4200
 
