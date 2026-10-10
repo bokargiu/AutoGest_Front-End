@@ -22,6 +22,7 @@ export class UserServiceService {
     return this.http.post<any>(baseAPI+'/api/User/Login', {
         "nameOrEmail": nameOrEmail,
         "password": password
+        
       }
     )
   }
