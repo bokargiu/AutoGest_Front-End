@@ -20,9 +20,8 @@ export class UserServiceService {
 
   Login(nameOrEmail:string, password:string): Observable<any>{
     return this.http.post<any>(baseAPI+'/api/User/Login', {
-        "nameOrEmail": nameOrEmail,
-        "password": password
-        
+        "NameOrEmail": nameOrEmail,
+        "Password": password
       }
     )
   }
