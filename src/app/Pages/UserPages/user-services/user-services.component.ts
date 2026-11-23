@@ -17,6 +17,8 @@ import { CommonModule } from '@angular/common';
 import { InputGroupModule } from "primeng/inputgroup";
 import { InputGroupAddonModule } from "primeng/inputgroupaddon";
 import { CalendarModule } from "primeng/calendar";
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-user-services',
@@ -37,13 +39,15 @@ import { CalendarModule } from "primeng/calendar";
     CommonModule,
     InputGroupModule,
     InputGroupAddonModule,
-    CalendarModule
+    CalendarModule,
+    ToastModule
 ],
+  providers: [MessageService],
   templateUrl: './user-services.component.html',
   styleUrl: './user-services.component.css'
 })
 export class UserServicesComponent implements OnInit{
-  constructor(private serviceS:ServiceService) {}
+  constructor(private serviceS:ServiceService, private messageService: MessageService) {}
 
   @ViewChild('tb') table!: Table;
 
@@ -90,6 +94,7 @@ export class UserServicesComponent implements OnInit{
         console.log("Adicionado com sucesso!");
       },
       error: (err) => {
+        this.messageService.add({severity:'error', summary: 'Erro', detail: err.error.message});
         console.error(err);
       }
     });
@@ -109,6 +114,7 @@ export class UserServicesComponent implements OnInit{
         this.refreshTable();
       },
       error: (err) => {
+        this.messageService.add({severity:'error', summary: 'Erro', detail: err.error.message});
         console.error(err)
       }
     })
@@ -127,6 +133,7 @@ export class UserServicesComponent implements OnInit{
         console.log("Excluido com sucesso!");
       },
       error: (err) => {
+        this.messageService.add({severity:'error', summary: 'Erro', detail: err.error.message});
         console.error(err);
       }
     })
@@ -137,6 +144,7 @@ export class UserServicesComponent implements OnInit{
           this.services = ss;
       },
       error: (err) => {
+        this.messageService.add({severity:'error', summary: 'Erro', detail: err.error.message});
         console.error(err);
       }
     });
