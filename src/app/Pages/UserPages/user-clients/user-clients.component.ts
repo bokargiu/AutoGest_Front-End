@@ -14,6 +14,8 @@ import { __values } from 'tslib';
 import { Client } from 'src/app/Interfaces/client';
 import { ClientService } from 'src/app/Services/ClientService/client.service';
 import { InputMaskModule } from 'primeng/inputmask';
+import { ToastItem, ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-user-clients',
@@ -30,13 +32,15 @@ import { InputMaskModule } from 'primeng/inputmask';
     RatingModule,
     FormsModule,
     DialogModule,
-    InputMaskModule
+    InputMaskModule,
+    ToastModule
 ],
+providers: [MessageService],
   templateUrl: './user-clients.component.html',
   styleUrl: './user-clients.component.css'
 })
 export class UserClientsComponent implements OnInit{
-  constructor(private clientS:ClientService) {}
+  constructor(private clientS:ClientService, private messageService: MessageService) {}
 
   @ViewChild('tb') table!: Table;
 
@@ -76,6 +80,7 @@ export class UserClientsComponent implements OnInit{
         console.log("Adicionado com sucesso!");
       },
       error: (err) => {
+        this.messageService.add({severity:'error', summary: 'Erro', detail: err.error.message});
         console.error(err);
       }
     });
@@ -94,6 +99,7 @@ export class UserClientsComponent implements OnInit{
         this.refreshTable();
       },
       error: (err) => {
+        this.messageService.add({severity:'error', summary: 'Erro', detail: err.error.message});
         console.error(err)
       }
     })
@@ -110,6 +116,7 @@ export class UserClientsComponent implements OnInit{
         console.log("Excluido com sucesso!");
       },
       error: (err) => {
+        this.messageService.add({severity:'error', summary: 'Erro', detail: err.error.message});
         console.error(err);
       }
     })
@@ -120,6 +127,7 @@ export class UserClientsComponent implements OnInit{
           this.clients = cs;
       },
       error: (err) => {
+        this.messageService.add({severity:'error', summary: 'Erro', detail: err.error.message});
         console.error(err);
       }
     });
